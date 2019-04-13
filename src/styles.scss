@@ -7,6 +7,14 @@ html, body, app-root,.site,mat-sidenav-container,mat-sidenav-content{
   margin: 0;
 }
 
-.fill-remaining-space{
+a {
+  text-decoration:none;
+}
+
+.fill-remaining-space {
   flex: auto;
+}
+
+.full-width {
+  width: 100%;
 }
