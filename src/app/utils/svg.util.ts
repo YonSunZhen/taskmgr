@@ -1,6 +1,7 @@
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
+//注册svg图片到全局中可以使用
 export const loadSvgResources = (ir: MatIconRegistry, ds: DomSanitizer) => {
   ir.addSvgIcon('xiangmu', ds.bypassSecurityTrustResourceUrl('assets/images/xiangmu.svg'));
   ir.addSvgIcon('month', ds.bypassSecurityTrustResourceUrl('assets/images/month.svg'));
@@ -12,4 +13,7 @@ export const loadSvgResources = (ir: MatIconRegistry, ds: DomSanitizer) => {
     21,22,23,24,25,26,27,28,29,30,31
   ];
   days.forEach(d => ir.addSvgIcon('day'+d, ds.bypassSecurityTrustResourceUrl('assets/images/day/day'+d+'.svg')));
+  for(let i = 1; i < 17; i++){
+    ir.addSvgIcon('users-'+i, ds.bypassSecurityTrustResourceUrl('assets/images/avatar/users-'+i+'.svg'));
+  }
 }

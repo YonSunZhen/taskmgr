@@ -12,3 +12,8 @@ main {
 mat-sidenav{
   width: 300px;
 }
+
+//黑夜主题背景色
+mat-sidenav-container.myapp-dark-theme {
+  background-color: black;
+}

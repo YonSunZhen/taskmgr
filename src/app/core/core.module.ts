@@ -1,11 +1,14 @@
 import { NgModule, SkipSelf, Optional } from '@angular/core';
 import { SharedModule } from "../shared/shared.module";
 import { HttpClientModule } from "@angular/common/http";
+// 工具类中加载svg图片用的
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import 'hammerjs';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+// 引入工具类加载svg图片
 import { loadSvgResources } from '../utils/svg.util';
 
 @NgModule({
@@ -40,6 +43,7 @@ export class CoreModule {
     if (parent) {
       throw  new Error('模块已经存在，不能再次加载!');
     }
+    // 执行加载svg图片的方法
     loadSvgResources(ir,ds);
   }
 }
