@@ -4,7 +4,11 @@
       {{item.name}}
     </mat-card-title>
   </mat-card-header>
-  <img mat-card-image [src]="item.coverImg" alt="项目封面">
+  <div style="margin-top:10px;">
+    <a href="/tasklist">
+      <img mat-card-image [src]="item.coverImg" alt="项目封面">
+    </a>
+  </div>
   <mat-card-content>
     {{item.desc}}
   </mat-card-content>
@@ -13,7 +17,7 @@
       <mat-icon>note</mat-icon>
       <span>编辑</span>
     </button>
-    <button mat-button type="button">
+    <button mat-button type="button" (click)="onInviteClick()">
       <mat-icon>group_add</mat-icon>
       <span>邀请</span>
     </button>

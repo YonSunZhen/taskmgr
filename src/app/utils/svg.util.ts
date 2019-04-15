@@ -7,6 +7,7 @@ export const loadSvgResources = (ir: MatIconRegistry, ds: DomSanitizer) => {
   ir.addSvgIcon('month', ds.bypassSecurityTrustResourceUrl('assets/images/month.svg'));
   ir.addSvgIcon('week', ds.bypassSecurityTrustResourceUrl('assets/images/week.svg'));
   ir.addSvgIcon('day', ds.bypassSecurityTrustResourceUrl('assets/images/day.svg'));
+  ir.addSvgIcon('moveto', ds.bypassSecurityTrustResourceUrl('assets/images/moveto.svg'));
   const days = [
     1,2,3,4,5,6,7,8,9,10,
     11,12,13,14,15,16,17,18,19,20,

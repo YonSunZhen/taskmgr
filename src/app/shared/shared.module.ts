@@ -11,7 +11,9 @@ import {
   MatListModule,
   MatSlideToggleModule,
   MatGridListModule,
-  MatDialogModule
+  MatDialogModule,
+  MatAutocompleteModule,
+  MatMenuModule
 } from '@angular/material';
 //SharedModule作为中间模块
 @NgModule({
@@ -28,7 +30,9 @@ import {
     MatListModule,
     MatSlideToggleModule,
     MatGridListModule,
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatMenuModule
   ],
   //表示导出的模块，之后他、其他模块直接导入SharedModule就行了
   exports: [
@@ -43,7 +47,9 @@ import {
     MatListModule,
     MatSlideToggleModule,
     MatGridListModule,
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatMenuModule
   ]
 })
 export class SharedModule { }

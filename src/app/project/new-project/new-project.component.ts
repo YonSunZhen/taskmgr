@@ -17,11 +17,10 @@ export class NewProjectComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.data);
-    // this.oc.themeClass = this.data.dark ? "myapp-dark-theme" : null;
   }
 
   onClick() {
-    this.dialogRef.close('收到了信息!');
+    this.dialogRef.close('收到了新建框信息!');
   }
 
 }
