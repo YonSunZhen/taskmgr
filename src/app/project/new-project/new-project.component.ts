@@ -20,7 +20,7 @@ export class NewProjectComponent implements OnInit {
   }
 
   onClick() {
-    this.dialogRef.close('收到了新建框信息!');
+    this.dialogRef.close('收到了新建项目框信息!');
   }
 
 }

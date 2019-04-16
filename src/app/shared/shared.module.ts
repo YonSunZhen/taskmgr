@@ -13,7 +13,13 @@ import {
   MatGridListModule,
   MatDialogModule,
   MatAutocompleteModule,
-  MatMenuModule
+  MatMenuModule,
+  MatCheckboxModule,
+  MatTooltipModule,
+  MatRadioModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSelectModule
 } from '@angular/material';
 //SharedModule作为中间模块
 @NgModule({
@@ -32,7 +38,13 @@ import {
     MatGridListModule,
     MatDialogModule,
     MatAutocompleteModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule
   ],
   //表示导出的模块，之后他、其他模块直接导入SharedModule就行了
   exports: [
@@ -49,7 +61,13 @@ import {
     MatGridListModule,
     MatDialogModule,
     MatAutocompleteModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule
   ]
 })
 export class SharedModule { }

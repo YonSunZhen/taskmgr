@@ -1,9 +1,9 @@
 <div class="taskLists">
   <app-task-list class="listContainer" *ngFor="let list of lists">
-    <app-task-header [header] = "list.name">
+    <app-task-header [header] = "list.name" (onNewTask)="openNewTaskDialog()" (onCopyTask)="openCopyTaskDialog()">
 
     </app-task-header>
-    <app-task-item *ngFor="let task of list.tasks">
+    <app-task-item *ngFor="let task of list.tasks" [item]="task">
 
     </app-task-item>
   </app-task-list>

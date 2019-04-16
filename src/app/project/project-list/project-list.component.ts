@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 //导入要被打开的对话框组件
 import { NewProjectComponent } from '../new-project/new-project.component';
 import { InviteComponent } from '../invite/invite.component';
@@ -66,7 +66,7 @@ export class ProjectListComponent implements OnInit {
   //打开新建对话框
   openNewProjectDialog() {
     const dialogRef = this.dialog.open(NewProjectComponent,{
-      data: {data: "这是新建框"}
+      data: {data: "这是新建项目框"}
     });
     dialogRef.afterClosed().subscribe(result => console.log(result));
   }

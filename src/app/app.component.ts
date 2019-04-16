@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-//切换主题时让对话框和菜单弹出框也生效
+//切换主题时让对话框和菜单弹出框也生效OverlayContainer应用于全局
 import {OverlayContainer} from '@angular/cdk/overlay';
 
 @Component({
