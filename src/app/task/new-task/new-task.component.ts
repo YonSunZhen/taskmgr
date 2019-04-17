@@ -12,6 +12,8 @@ export class NewTaskComponent implements OnInit {
    //泛型？
    private dialogRef: MatDialogRef<NewTaskComponent>) { }
 
+  title = '';
+
   priorityes = [
     {
       "label":"紧急",
@@ -28,7 +30,9 @@ export class NewTaskComponent implements OnInit {
   ]
 
   ngOnInit() {
-    console.log(this.data);
+    // console.log(this.data);
+    this.title = this.data.title;
+    console.log(this.data.task);
   }
 
   onClick() {

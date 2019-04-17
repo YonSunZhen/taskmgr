@@ -3,16 +3,9 @@
   <div mat-dialog-content>
     <mat-form-field>
       <mat-select placeholder="请选择目标列表">
-        <mat-option *ngFor="let list of lists" [value]="list.value">
+        <mat-option *ngFor="let list of lists" [value]="list.name">
           {{list.name}}
-        </mat-option>
-        <!-- <mat-option value = "1">
-          1
-        </mat-option>
-        <mat-option value = "2">
-          2
-        </mat-option> -->
-        
+        </mat-option>     
       </mat-select>
     </mat-form-field>
   </div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NewTaskComponent } from '../new-task/new-task.component';
 import { CopyTaskComponent } from '../copy-task/copy-task.component';
+import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
+import { NewTaskListComponent } from '../new-task-list/new-task-list.component';
 
 @Component({
   selector: 'app-task-home',
@@ -83,7 +85,9 @@ export class TaskHomeComponent implements OnInit {
   //打开新建任务对话框
   openNewTaskDialog() {
     const dialogRef = this.dialog.open(NewTaskComponent,{
-      data: {"data":"haha"}
+      data: {
+        "title":"新建任务:"
+      }
     });
     dialogRef.afterClosed().subscribe(result => console.log(result));
   }
@@ -92,16 +96,50 @@ export class TaskHomeComponent implements OnInit {
   openCopyTaskDialog() {
     const dialogRef = this.dialog.open(CopyTaskComponent,{
       data: {
-        lists: [
-          {
-            "name":"列表一",
-            "value":1
-          },
-          {
-            "name":"列表二",
-            "value":2
-          }
-        ]
+        lists: this.lists
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => console.log(result));
+  }
+
+  //打开修改任务对话框
+  openEditTaskDialog(task) {
+    const dialogRef = this.dialog.open(NewTaskComponent,{
+      data: {
+        "title":"修改任务:",
+        "task":task
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => console.log(result));
+  }
+
+  //打开删除列表对话框
+  openDelTaskDialog() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent,{
+      data: {
+        "title": "删除列表:",
+        "content": "确认删除列表吗？"
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => console.log(result));
+  }
+
+  //打开修改列表名称对话框
+  openEditListDialog() {
+    const dialogRef = this.dialog.open(NewTaskListComponent,{
+      data: {
+        "title": "修改列表名称:",
+        "content": "确认删除列表吗？"
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => console.log(result));
+  }
+  //打开新建列表对话框
+  openNewListDialog() {
+    const dialogRef = this.dialog.open(NewTaskListComponent,{
+      data: {
+        "title": "新建列表名称:",
+        "content": "确认删除列表吗？"
       }
     });
     dialogRef.afterClosed().subscribe(result => console.log(result));

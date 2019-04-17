@@ -12,12 +12,22 @@ export class ProjectItemComponent implements OnInit {
   //子组件中必须有声明才能使用父组件传过来的数据
   @Input() item;
   @Output() onInvite = new EventEmitter<void>();
+  @Output() onEdit = new EventEmitter<void>();
+  @Output() onDelete = new EventEmitter<void>();
 
   ngOnInit() {
   }
 
   onInviteClick() {
     this.onInvite.emit();
+  }
+
+  onEditClick() {
+    this.onEdit.emit();
+  }
+
+  onInviteDelete() {
+    this.onDelete.emit();
   }
 
 }

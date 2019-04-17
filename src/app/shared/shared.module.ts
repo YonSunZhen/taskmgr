@@ -21,9 +21,13 @@ import {
   MatNativeDateModule,
   MatSelectModule
 } from '@angular/material';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 //SharedModule作为中间模块
 @NgModule({
-  declarations: [],
+  declarations: [ConfirmDialogComponent],
+  entryComponents: [
+    ConfirmDialogComponent
+  ],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
