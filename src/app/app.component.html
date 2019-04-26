@@ -1,14 +1,15 @@
 <mat-sidenav-container [class.myapp-dark-theme]="isDarkTheme">
   <mat-sidenav #sidenav mode="over">
-    <app-sidebar></app-sidebar>
+    <app-sidebar (navClick)="sidenav.toggle()"></app-sidebar>
   </mat-sidenav>
   <!-- <mat-sidenav-content> -->
     <div class="site">
       <header>
         <app-header (toggle)="sidenav.toggle()" (toggleDarkTheme)="changeDarkTheme($event.checked)" ></app-header>
       </header>
-      <main>
-        <router-outlet></router-outlet>
+      <main [@routeAnim]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+        <!-- <div class="square" (click)="test()" [@square]="state=='black'? 'black':'green'"></div> -->
       </main>
       <footer>
         <app-footer></app-footer>

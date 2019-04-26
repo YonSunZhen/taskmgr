@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 //切换主题时让对话框和菜单弹出框也生效OverlayContainer应用于全局
 import {OverlayContainer} from '@angular/cdk/overlay';
+import { RouterOutlet } from '@angular/router';
+import { slideToRight } from './animation/router.anim'
+// import { animation } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [ slideToRight ]
 })
 export class AppComponent {
 
@@ -29,5 +33,9 @@ export class AppComponent {
     }else{
       this.oc.getContainerElement().classList.remove('myapp-dark-theme');
     }
+  }
+  //转场动画
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 }

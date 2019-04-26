@@ -4,11 +4,14 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectItemComponent } from './project-item/project-item.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { InviteComponent } from './invite/invite.component';
+import { RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
     SharedModule,
-    // ProjectListComponent
+    RouterModule,
+    BrowserModule
   ],
   //声明式组件
   declarations: [

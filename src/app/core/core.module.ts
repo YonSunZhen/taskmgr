@@ -10,11 +10,13 @@ import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 // 引入工具类加载svg图片
 import { loadSvgResources } from '../utils/svg.util';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
     // MatToolbarModule,
     // MatIconModule,
     // MatButtonModule
