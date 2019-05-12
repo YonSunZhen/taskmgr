@@ -11,6 +11,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 // 引入工具类加载svg图片
 import { loadSvgResources } from '../utils/svg.util';
 import { RouterModule } from '@angular/router';
+import { QuoteService } from '../services/quote.service';
 
 @NgModule({
   imports: [
@@ -31,6 +32,14 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     FooterComponent,
     SidebarComponent
+  ],
+  providers: [
+    {
+      provide: 'BASE_CONFIG', useValue: {
+        'uri': 'http://localhost:3000'
+      }
+    },
+    QuoteService
   ]
 })
 export class CoreModule {

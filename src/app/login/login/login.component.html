@@ -24,12 +24,12 @@
         每日佳句
       </mat-card-title>
       <mat-card-subtitle>
-        满足感在于不断的努力，而不是现有成就。全心努力定会胜利慢慢。
+        {{this.quote.cn}}
       </mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="../../../assets/images/encouragement.jpg" alt="">
+    <img mat-card-image [src]="quote.pic" alt="">
     <mat-card-content>
-     <p> Satisfaction lies in the effort,not in the attain.</p>
+     <p> {{this.quote.en}}</p>
     </mat-card-content>
   </mat-card>
 </form>
