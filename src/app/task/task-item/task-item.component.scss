@@ -53,3 +53,8 @@ mat-icon {
 :host {
   width: 100%;
 }
+
+.drag-start {
+  opacity: 0.5;
+  border: #ff525b dashed 2px;
+}

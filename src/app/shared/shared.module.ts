@@ -22,6 +22,7 @@ import {
   MatSelectModule
 } from '@angular/material';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { DirectiveModule } from '../directive/directive.module';
 //SharedModule作为中间模块
 @NgModule({
   declarations: [ConfirmDialogComponent],
@@ -48,7 +49,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    DirectiveModule
   ],
   //表示导出的模块，之后他、其他模块直接导入SharedModule就行了
   exports: [
@@ -71,7 +73,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    DirectiveModule
   ]
 })
 export class SharedModule { }
