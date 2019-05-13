@@ -23,3 +23,7 @@
 .drag-enter {
   background-color: dimgray;
 }
+.drag-start {
+  opacity: 0.5;
+  border: #ff525b dashed 2px;
+}

@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/
 import { DragDropService } from '../drag-drop.service';
 
 @Directive({
-  selector: '[app-draggable][draggedClass]'
+  selector: '[app-draggable]'
 })
 export class DragDirective {
 
@@ -21,6 +21,7 @@ export class DragDirective {
   @Input() draggedClass: string;
   @Input() dragTag: string;//用于唯一标识是什么类型的拖拽
   @Input() dragData: any;
+
   constructor(
     private el: ElementRef, 
     private rd: Renderer2, 

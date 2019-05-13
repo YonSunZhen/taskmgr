@@ -24,7 +24,7 @@ export class DragDropService {
     return this._dragData.asObservable();
   }
 
-  cleanDragData() {
+  clearDragData() {
     this._dragData.next(null);
   }
 
