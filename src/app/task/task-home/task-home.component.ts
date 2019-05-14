@@ -22,6 +22,7 @@ export class TaskHomeComponent implements OnInit {
     {
       "id": 1,
       "name": "待办",
+      "order": 1,
       "tasks": [
         {
           "id":1,
@@ -54,10 +55,11 @@ export class TaskHomeComponent implements OnInit {
     {
       "id": 2,
       "name": "进行中",
+      "order": 2,
       "tasks": [
         {
           "id":1,
-          "desc":'任务一:去星巴克买杯咖啡2',
+          "desc":'任务三:去星巴克买杯咖啡2',
           "completed": false,
           "priority": 2,
           "owner": {
@@ -70,7 +72,7 @@ export class TaskHomeComponent implements OnInit {
         },
         {
           "id":2,
-          "desc":'任务二:去星巴克买杯咖啡2',
+          "desc":'任务四:去星巴克买杯咖啡2',
           "completed": true,
           "priority": 1,
           "owner": {
@@ -148,7 +150,7 @@ export class TaskHomeComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => console.log(result));
   }
-
+  //srcData表示拖动的数据，list表示放下的那个区域的数据
   handleMove(srcData, list) {
     switch (srcData.tag) {
       case 'task-item':
@@ -156,6 +158,10 @@ export class TaskHomeComponent implements OnInit {
         break;
       case 'task-list':
         console.log('handling list');
+        const srcList = srcData.data;
+        const tempOrder = srcList.order;
+        srcList.order = list.order;
+        list.order = tempOrder;
         break;
       default:
         break;

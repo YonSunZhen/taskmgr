@@ -12,12 +12,14 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { loadSvgResources } from '../utils/svg.util';
 import { RouterModule } from '@angular/router';
 import { QuoteService } from '../services/quote.service';
+import { ServicesModule } from '../services/services.module';
 
 @NgModule({
   imports: [
     SharedModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    ServicesModule.forRoot()
     // MatToolbarModule,
     // MatIconModule,
     // MatButtonModule

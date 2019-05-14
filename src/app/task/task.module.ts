@@ -21,7 +21,7 @@ import { NewTaskListComponent } from './new-task-list/new-task-list.component';
   imports: [
     SharedModule
   ],
-  //对话框组件在这里面写
+  //对话框组件在这里面写,表示一进入这个模块就要进行加载（初始化）,而不是调用时才加载
   entryComponents: [
     NewTaskComponent,
     CopyTaskComponent,

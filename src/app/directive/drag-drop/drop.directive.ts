@@ -9,8 +9,9 @@ export class DropDirective {
 
   @Output() dropped = new EventEmitter<DragData>();
   @Input() dragEnterClass: string;
-  //这里为什么是数组
+  //这里为什么是数组,记录拖拽放进的目标元素的类型，['task-item','task-list']
   @Input() dropTags: Array<string> = [];
+  //用于存放拖动的元素的数据流，从服务中获取（拖动的时候放在服务中）
   private data$;
 
   constructor(
@@ -27,6 +28,10 @@ export class DropDirective {
     if(this.el.nativeElement === ev.target) {
       // this.rd.addClass(this.el.nativeElement, this.dragEnterClass);
       this.data$.subscribe(dragData => {
+        // console.log('dragData:');
+        // console.log(dragData);
+        // console.log('dropTags:');
+        // console.log(this.dropTags);
         if(this.dropTags.indexOf(dragData.tag) > -1) {
           this.rd.addClass(this.el.nativeElement, this.dragEnterClass);
         }
