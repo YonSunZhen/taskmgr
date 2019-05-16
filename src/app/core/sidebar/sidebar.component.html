@@ -1,7 +1,7 @@
 <mat-nav-list>
   <h3 mat-subheader>项目</h3>
-  <a [routerLink]="['/login']">
-    <mat-list-item>
+  <a [routerLink]="['/project']">
+    <mat-list-item (click)="onNavClick()">
       <mat-icon mat-list-icon svgIcon="xiangmu"></mat-icon>
       <span mat-line>项目首页</span>
       <span mat-line mat-subheader>查看您的所有项目</span>
@@ -9,14 +9,14 @@
   </a>
   <!-- <mat-divider></mat-divider> -->
   <h3 mat-subheader>日历</h3>
-  <a [routerLink]="['/tasklist']">
+  <a>
     <mat-list-item (click)="onNavClick()">
       <mat-icon mat-list-icon svgIcon="month"></mat-icon>
       <span mat-line>月视图</span>
       <span mat-line mat-subheader>按月份查看您的所有项目</span>
     </mat-list-item>
   </a>
-  <a [routerLink]="['/project']">
+  <a>
     <mat-list-item (click)="onNavClick()">
       <mat-icon mat-list-icon svgIcon="week"></mat-icon>
       <span mat-line>周视图</span>
