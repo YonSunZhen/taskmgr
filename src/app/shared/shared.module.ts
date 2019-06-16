@@ -27,7 +27,10 @@ import { DirectiveModule } from '../directive/directive.module';
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
 //SharedModule作为中间模块
 @NgModule({
-  declarations: [ConfirmDialogComponent, ImageListSelectComponent],
+  declarations: [
+    ConfirmDialogComponent, 
+    ImageListSelectComponent
+  ],
   entryComponents: [
     ConfirmDialogComponent
   ],
@@ -80,7 +83,8 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     MatSelectModule,
     DirectiveModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ImageListSelectComponent,//导入自定义的表单控件
   ]
 })
 export class SharedModule { }

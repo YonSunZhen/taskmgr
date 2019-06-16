@@ -7,8 +7,9 @@ import { ProjectModule } from "./project/project.module";
 import { TaskModule } from "./task/task.module";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login/login.component';
-import { RegisterComponent } from './login/register/register.component';
+import { LoginModule } from './login/login.module';
+// import { LoginComponent } from './login/login/login.component';
+// import { RegisterComponent } from './login/register/register.component';
 import { RouterModule } from '@angular/router';
 // import { ServicesModule } from './services/services.module';
 // import { TaskHomeComponent } from './task/task-home/task-home.component';
@@ -17,8 +18,8 @@ import { RouterModule } from '@angular/router';
   //可声明对象表，那些属于本NgModule的组件、指令、管道
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent
+    // LoginComponent,
+    // RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +28,7 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     ProjectModule,
     TaskModule,
+    LoginModule,
     RouterModule,
     HttpClientModule
   ],
