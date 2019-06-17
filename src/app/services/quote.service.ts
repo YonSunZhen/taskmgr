@@ -12,6 +12,8 @@ export class QuoteService {
   getQuote():Observable<Quote> {
     //Math.random()返回大于等于0小于1的随机数，Math.floor向下舍入
     const uri = `${this.config.uri}/quotes/${Math.floor(Math.random()*10)}`;
-    return this.http.get(uri).pipe(map(res => res as Quote));
+    return this.http.get(uri)
+      //.debug('quotes:') //这里有问题this.do 不是一个function
+      .pipe(map(res => res as Quote));
   }
 }

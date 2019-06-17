@@ -13,6 +13,7 @@ import { loadSvgResources } from '../utils/svg.util';
 import { RouterModule } from '@angular/router';
 import { QuoteService } from '../services/quote.service';
 import { ServicesModule } from '../services/services.module';
+import '../utils/debug.util';
 
 @NgModule({
   imports: [
