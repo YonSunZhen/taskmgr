@@ -14,7 +14,6 @@ export class QuoteService {
     //Math.random()返回大于等于0小于1的随机数，Math.floor向下舍入
     const uri = `${this.config.uri}/quotes/${Math.floor(Math.random()*10)}`;
     return this.http.get(uri)
-      //.debug('quotes:') //这里有问题this.do 不是一个function
       .pipe(
         debug('quotes:'), //这里有问题this.do 不是一个function
         map(res => res as Quote),

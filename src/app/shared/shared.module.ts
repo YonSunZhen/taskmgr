@@ -20,16 +20,19 @@ import {
   MatRadioModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSelectModule
+  MatSelectModule,
+  MatButtonToggleModule
 } from '@angular/material';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { DirectiveModule } from '../directive/directive.module';
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
+import { AgeInputComponent } from './age-input/age-input.component';
 //SharedModule作为中间模块
 @NgModule({
   declarations: [
     ConfirmDialogComponent, 
-    ImageListSelectComponent
+    ImageListSelectComponent, 
+    AgeInputComponent
   ],
   entryComponents: [
     ConfirmDialogComponent
@@ -55,6 +58,7 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatButtonToggleModule,
     DirectiveModule,
     FormsModule,
     ReactiveFormsModule
@@ -81,10 +85,12 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatButtonToggleModule,
     DirectiveModule,
     FormsModule,
     ReactiveFormsModule,
-    ImageListSelectComponent,//导入自定义的表单控件
+    ImageListSelectComponent,//导出自定义的表单控件
+    AgeInputComponent
   ]
 })
 export class SharedModule { }
