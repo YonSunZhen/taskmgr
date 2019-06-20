@@ -13,7 +13,7 @@ import { loadSvgResources } from '../utils/svg.util';
 import { RouterModule } from '@angular/router';
 import { QuoteService } from '../services/quote.service';
 import { ServicesModule } from '../services/services.module';
-// import '../utils/debug.util';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 @NgModule({
   imports: [
@@ -40,8 +40,9 @@ import { ServicesModule } from '../services/services.module';
     {
       provide: 'BASE_CONFIG', useValue: {
         'uri': 'http://localhost:3000'
-      }
+      },
     },
+    {provide: MAT_DATE_LOCALE, useValue: 'zh-CN'},//这里改变material日历控件的时间显示格式
     QuoteService
   ]
 })
