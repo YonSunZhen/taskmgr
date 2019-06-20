@@ -68,8 +68,6 @@ export class AgeInputComponent implements ControlValueAccessor,OnInit,OnDestroy 
   ngOnInit() {
     //如果父组件没传值的话就初始化数据
     const initDate = toDate(subYears(Date.now(), 30));
-    console.log('77777');
-    // console.log(this.dateOfBirth);
     const initAge = this.toAge(initDate);
     this.form = this.fb.group({
       birthday: [initDate,this.validateDate],//validateDate自己写的验证函数
@@ -117,27 +115,23 @@ export class AgeInputComponent implements ControlValueAccessor,OnInit,OnDestroy 
       const age = this.toAge(d.date);
       if(d.from === 'birthday') {
         if(age.age !== ageNum.value) {
-          console.log('中间改变了');
           //更新值
           ageNum.patchValue(age.age,{emitEvent: false});
-          console.log('中间改变了1');
+          console.log('中间改变了');
         }
         if(age.unit !== ageUnit.value) {
-          console.log('右边改变了');
           ageUnit.patchValue(age.unit,{emitEvent:false});
-          console.log('右边改变了1');
+          console.log('右边改变了');
         }
-        //将变化通知到父组件
+        //将变化通知到父组件(必须添加，不然父组件获取不到最新的值)
         this.propagateChange(d.date);
       }else{
         const ageToCompare = this.toAge(birthday.value);
         if(age.age !== ageToCompare.age || age.unit !== ageToCompare.unit) {
-          console.log('左边改变了');
-          console.log(d.date);
           birthday.patchValue(d.date,{emitEvent: false});
           this.propagateChange(d.date);
           console.log(birthday.value);
-          console.log('左边改变了1');
+          console.log('左边改变了');
         }
       }
     })
@@ -154,10 +148,9 @@ export class AgeInputComponent implements ControlValueAccessor,OnInit,OnDestroy 
     if(obj) {
       const date = toDate(obj);
       // this.dateOfBirth = date;
-      console.log('666666');
-      console.log(date);
       this.form.get('birthday').patchValue(date,{emitEvent: true});
       const age = this.toAge(date);
+      //如果为 true 或未提供（默认），则当控件值发生变化时，statusChanges 和 valueChanges 这两个 Observable 分别会以最近的状态和值发出事件
       this.form.get('age').get('ageNum').patchValue(age.age,{emitEvent: true});
       this.form.get('age').get('ageUnit').patchValue(age.unit,{emitEvent: true});
     }

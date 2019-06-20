@@ -41,7 +41,8 @@ export class RegisterComponent implements OnInit {
     if(!valid) {
       return;
     }
-    console.log(value);
+    console.log('时间为');
+    console.log(value.dateOfBirth);
   }
 
 }
