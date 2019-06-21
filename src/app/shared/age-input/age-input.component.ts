@@ -16,6 +16,7 @@ import {
 import { toDate, isValidDate } from '../../utils/date.util';
 
 //表明单位只能是这三种(为每种单位规定一个范围)
+//这里就相当于对AgeUnit进行赋值(递增)
 export enum AgeUnit {
   Year = 0,
   Month,

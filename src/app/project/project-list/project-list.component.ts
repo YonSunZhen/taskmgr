@@ -5,6 +5,7 @@ import { NewProjectComponent } from '../new-project/new-project.component';
 import { InviteComponent } from '../invite/invite.component';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { listAnimation } from '../../animation/list.anim';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-project-list',
@@ -14,62 +15,19 @@ import { listAnimation } from '../../animation/list.anim';
 })
 export class ProjectListComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  projects;
+  constructor(public dialog: MatDialog, private projectService$: ProjectService) {
+    //获取project列表
+    this.projectService$.get("1").subscribe(projects => {
+      this.projects = projects;
+      console.log('1111111111');
+      console.log(this.projects);
+    });
+  }
   // @HostBinding('@routeAnim') state2;
 
-  projects = [
-    {
-      "id": 1,
-      "name": "企业协作平台",
-      "desc": "这是一个企业内部项目",
-      "coverImg": "assets/images/covers/0.jpg"
-    },
-    {
-      "id": 2,
-      "name": "自动化测试项目",
-      "desc": "这是一个企业内部项目",
-      "coverImg": "assets/images/covers/1.jpg"
-    },
-    {
-      "id": 3,
-      "name": "企业协作平台",
-      "desc": "这是一个企业内部项目",
-      "coverImg": "assets/images/covers/0.jpg"
-    },
-    {
-      "id": 4,
-      "name": "自动化测试项目",
-      "desc": "这是一个企业内部项目",
-      "coverImg": "assets/images/covers/1.jpg"
-    },
-    // {
-    //   "name": "自动化测试项目",
-    //   "desc": "这是一个企业内部项目",
-    //   "coverImg": "assets/images/covers/1.jpg"
-    // },
-    // {
-    //   "name": "自动化测试项目",
-    //   "desc": "这是一个企业内部项目",
-    //   "coverImg": "assets/images/covers/1.jpg"
-    // },
-    // {
-    //   "name": "企业协作平台",
-    //   "desc": "这是一个企业内部项目",
-    //   "coverImg": "assets/images/covers/0.jpg"
-    // },
-    // {
-    //   "name": "自动化测试项目",
-    //   "desc": "这是一个企业内部项目",
-    //   "coverImg": "assets/images/covers/1.jpg"
-    // },
-    // {
-    //   "name": "自动化测试项目",
-    //   "desc": "这是一个企业内部项目",
-    //   "coverImg": "assets/images/covers/1.jpg"
-    // }
-  ]
-
   ngOnInit() {
+    
   }
   //打开新建项目对话框
   openNewProjectDialog() {
@@ -77,7 +35,11 @@ export class ProjectListComponent implements OnInit {
       data: {"title": "新建项目:"}
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      // console.log(result);
+      this.projectService$.add(result).subscribe((res) => {
+        console.log(res);
+        console.log('project添加成功!')
+      });
       this.projects = [...this.projects, {"id": 5, "name": '一个新项目', "desc": "这是一个新项目","coverImg": "assets/images/covers/0.jpg"}];
     });
   }

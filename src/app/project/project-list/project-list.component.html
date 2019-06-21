@@ -1,4 +1,5 @@
-<div [@listAnim]="projects.length" class="container">
+<!-- [@listAnim]="projects.length" -->
+<div class="container" [@listAnim]="projects.length">
   <app-project-item *ngFor="let project of projects"
     [item]="project"
     class="card"
@@ -7,6 +8,7 @@
     (onDelete)="openDeleteDialog(project)">
   </app-project-item>
 </div>
+
 
 
 <button class="fab-button" mat-fab type="button" (click)="openNewProjectDialog()">

@@ -3,6 +3,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 //MatDialogRef 用户将对话框的数据传到父页面
 //对话框默认不支持更换主题的，OverlayContainer可处理
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { ReactiveFormsModule, FormGroup, FormBuilder, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-new-project',
@@ -11,18 +12,31 @@ import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 })
 export class NewProjectComponent implements OnInit {
 
+  form: FormGroup;
   title: ''
   constructor(@Inject(MAT_DIALOG_DATA) private data,
    //泛型？
-   private dialogRef: MatDialogRef<NewProjectComponent>) { }
+   private dialogRef: MatDialogRef<NewProjectComponent>,
+   private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      name:[],
+      desc:[]
+    })
     this.title = this.data.title;
-    console.log(this.data.project);
+    // console.log(this.data.project);
   }
 
-  onClick() {
-    this.dialogRef.close('收到了新建项目框信息!');
+  onSubmit({value,valid},ev: Event) {
+    ev.preventDefault();
+    const name = value.name;
+    const desc = value.desc;
+    const data = {
+      'name': name,
+      'desc': desc
+    }
+    this.dialogRef.close(data);
   }
 
 }

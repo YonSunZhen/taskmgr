@@ -60,5 +60,38 @@
       "en": "I have always been delighted at the prospect of a new day, a fresh try, one more start, with perhaps a bit of magic waiting somewhere behind the morning.",
       "pic": "/assets/images/quotes/9.jpg"
     }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "name": "企业协作平台",
+      "desc": "这是一个企业内部项目",
+      "coverImg": "assets/images/covers/0.jpg",
+      "members": ["1","2"]
+    },
+    {
+      "id": "2",
+      "name": "自动化测试项目",
+      "desc": "这是一个企业内部项目",
+      "coverImg": "assets/images/covers/1.jpg",
+      "members": ["1","2"]
+    },
+    {
+      "id": "3",
+      "name": "企业协作平台",
+      "desc": "这是一个企业内部项目",
+      "coverImg": "assets/images/covers/0.jpg",
+      "members": ["1","2"]
+    },
+    {
+      "id": "4",
+      "name": "自动化测试项目",
+      "desc": "这是一个企业内部项目",
+      "coverImg": "assets/images/covers/1.jpg",
+      "members": ["2"]
+    }
+  ],
+  "taskLists":[
+
   ]
 }
