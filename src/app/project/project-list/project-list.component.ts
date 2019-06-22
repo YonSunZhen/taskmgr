@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 //导入要被打开的对话框组件
 import { NewProjectComponent } from '../new-project/new-project.component';
@@ -16,10 +16,11 @@ import { ProjectService } from '../../services/project.service';
 export class ProjectListComponent implements OnInit {
 
   projects;
-  constructor(public dialog: MatDialog, private projectService$: ProjectService) {
+  constructor(public dialog: MatDialog,private cd: ChangeDetectorRef,  private projectService$: ProjectService) {
     //获取project列表
     this.projectService$.get("1").subscribe(projects => {
       this.projects = projects;
+      this.cd.markForCheck();//脏值检测？有问题？有什么用?
       console.log('1111111111');
       console.log(this.projects);
     });
@@ -32,6 +33,7 @@ export class ProjectListComponent implements OnInit {
   //打开新建项目对话框
   openNewProjectDialog() {
     const dialogRef = this.dialog.open(NewProjectComponent,{
+      //传到对话框的数据
       data: {"title": "新建项目:"}
     });
     dialogRef.afterClosed().subscribe(result => {

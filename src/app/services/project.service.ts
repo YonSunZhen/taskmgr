@@ -23,7 +23,7 @@ export class ProjectService {
       )
   }
 
-  // PUT
+  // PATCH
   update(project: Project): Observable<Project> {
     const uri = `${this.config.uri}/${this.domain}/${project.id}`;
     const toUpdate = {
