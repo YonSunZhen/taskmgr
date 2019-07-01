@@ -13,18 +13,32 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, FormControl} from '@angula
 export class NewProjectComponent implements OnInit {
 
   form: FormGroup;
-  title: ''
+  title: string;
+  coverImages = [];
   constructor(@Inject(MAT_DIALOG_DATA) private data,
    //泛型？
    private dialogRef: MatDialogRef<NewProjectComponent>,
    private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      name:[],
-      desc:[]
-    })
-    this.title = this.data.title;
+    this.coverImages = this.data.thumbnails;
+    if(this.data.project) {
+      this.form = this.fb.group({
+        name:[this.data.project.name],
+        desc:[this.data.project.desc],
+        coverImg: [this.data.project.coverImg]
+      });
+      this.title = '修改项目:';
+    }else{
+      this.form = this.fb.group({
+        name:[],
+        desc:[],
+        coverImg: [this.data.img]
+      });
+      this.title = '创建项目:';
+    }
+    
+    
     // console.log(this.data.project);
   }
 
@@ -32,9 +46,11 @@ export class NewProjectComponent implements OnInit {
     ev.preventDefault();
     const name = value.name;
     const desc = value.desc;
+    const coverImg = value.coverImg;
     const data = {
       'name': name,
-      'desc': desc
+      'desc': desc,
+      'coverImg': coverImg
     }
     this.dialogRef.close(data);
   }

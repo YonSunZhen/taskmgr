@@ -46,6 +46,8 @@ export class ImageListSelectComponent implements ControlValueAccessor {
   }
   //用来通知外部，组件已经发生变化
   registerOnChange(fn: any): void {
+    //这里必须添加，不然外部表单获取不到变化
+    this.propagateChange = fn;
     console.log("register");
     console.log(this.selected);
   }
