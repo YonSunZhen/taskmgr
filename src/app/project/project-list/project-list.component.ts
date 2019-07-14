@@ -31,7 +31,7 @@ export class ProjectListComponent implements OnInit {
       this.cd.markForCheck();//脏值检测？有问题？有什么用? 调用此方法会确保即使那些触发器没有被触发，也仍然检查该组件
     });
   }
-  //打开新建项目对话框
+  //打开新建项目对话框(增加项目)
   openNewProjectDialog() {
     const selectedImg = `/assets/images/covers/${Math.floor(Math.random() * 40)}_tn.jpg`;
     const dialogRef = this.dialog.open(NewProjectComponent,{
@@ -64,7 +64,7 @@ export class ProjectListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => console.log(result));
   }
-  //打开修改项目对话框
+  //打开修改项目对话框(修改项目)
   openEditDialog(project) {
     const dialogRef = this.dialog.open(NewProjectComponent,{
       data: {
@@ -85,7 +85,7 @@ export class ProjectListComponent implements OnInit {
       })
     });
   }
-  //打开删除对话框
+  //打开删除对话框(删除项目,还未完成)
   openDeleteDialog(project) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent,{
       data: {
@@ -96,6 +96,7 @@ export class ProjectListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if(result){
+        //去除点击的那一项
         this.projects = this.projects.filter(p => p.id !== project.id );
       }
     });

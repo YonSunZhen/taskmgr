@@ -4,7 +4,7 @@ import { NewTaskComponent } from '../new-task/new-task.component';
 import { CopyTaskComponent } from '../copy-task/copy-task.component';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { NewTaskListComponent } from '../new-task-list/new-task-list.component';
-// import { slideToRight } from '../../animation/router.anim';
+import { TaskListService } from '../../services/task-list.service';
 
 @Component({
   selector: 'app-task-home',
@@ -14,81 +14,17 @@ import { NewTaskListComponent } from '../new-task-list/new-task-list.component';
 })
 export class TaskHomeComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private taskListService$: TaskListService) { }
   //这到底是什么意思？
   // @HostBinding('@routeAnim') state1;
-
-  lists = [
-    {
-      "id": 1,
-      "name": "待办",
-      "order": 1,
-      "tasks": [
-        {
-          "id":1,
-          "desc":'任务一:去星巴克买杯咖啡1',
-          "completed": true,
-          "priority": 3,
-          "owner": {
-            "id": 1,
-            "name": "张三",
-            "avatar": "users-1"
-          },
-          "dueDate": new Date(),
-          "reminder": new Date()
-        },
-        {
-          "id":2,
-          "desc":'任务二:去星巴克买杯咖啡2机会的时候看姐夫好看电视剧符合贷款',
-          "completed": false,
-          "priority": 2,
-          "owner": {
-            "id": 2,
-            "name": "李四",
-            "avatar": "users-2"
-          },
-          "dueDate": new Date(),
-          "reminder": new Date()
-        }
-      ]  
-    },
-    {
-      "id": 2,
-      "name": "进行中",
-      "order": 2,
-      "tasks": [
-        {
-          "id":1,
-          "desc":'任务三:去星巴克买杯咖啡2',
-          "completed": false,
-          "priority": 2,
-          "owner": {
-            "id": 1,
-            "name": "张三2",
-            "avatar": "users-3"
-          },
-          "dueDate": new Date(),
-          "reminder": new Date()
-        },
-        {
-          "id":2,
-          "desc":'任务四:去星巴克买杯咖啡2',
-          "completed": true,
-          "priority": 1,
-          "owner": {
-            "id": 2,
-            "name": "李四2",
-            "avatar": "users-4"
-          },
-          "dueDate": new Date()
-        }
-      ]  
-    }
-  ]
+  lists;
 
   ngOnInit() {
+    this.taskListService$.get('1').subscribe(lists => {
+      this.lists = lists;
+    })
   }
-  //打开新建任务对话框
+  //打开新建任务对话框(增加任务)
   openNewTaskDialog() {
     const dialogRef = this.dialog.open(NewTaskComponent,{
       data: {
@@ -120,35 +56,58 @@ export class TaskHomeComponent implements OnInit {
   }
 
   //打开删除列表对话框
-  openDelTaskDialog() {
+  openDelTaskDialog(list) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent,{
       data: {
         "title": "删除列表:",
         "content": "确认删除列表吗？"
       }
     });
-    dialogRef.afterClosed().subscribe(result => console.log(result));
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.taskListService$.del(list).subscribe(res => {
+          console.log('成功删除列表!');
+          console.log(res);
+        })
+      }
+    });
   }
 
-  //打开修改列表名称对话框
-  openEditListDialog() {
+  //打开修改列表名称对话框(修改任务列表名)
+  openEditListDialog(taskLists) {
     const dialogRef = this.dialog.open(NewTaskListComponent,{
       data: {
-        "title": "修改列表名称:",
-        "content": "确认删除列表吗？"
+        "taskLists":taskLists
       }
     });
-    dialogRef.afterClosed().subscribe(result => console.log(result));
+    dialogRef.afterClosed().subscribe(result => {
+      const data = {
+        name: result.name,
+        id: taskLists.id
+      }
+      this.taskListService$.update(data).subscribe(res => {
+        console.log('成功修改列表名!');
+        console.log(res);
+      })
+    });
   }
-  //打开新建列表对话框
+  //打开新建列表对话框(增加任务列表)
   openNewListDialog() {
     const dialogRef = this.dialog.open(NewTaskListComponent,{
-      data: {
-        "title": "新建列表名称:",
-        "content": "确认删除列表吗？"
-      }
+      data: { }
     });
-    dialogRef.afterClosed().subscribe(result => console.log(result));
+    dialogRef.afterClosed().subscribe((res) => {
+      const data = {
+        name: res.name,
+        order: 3,
+        projectId: "1"
+      }
+      this.taskListService$.add(data).subscribe((res) => {
+        if(res.id) {
+          console.log('成功添加任务列表!');
+        }
+      })
+    });
   }
   //srcData表示拖动的数据，list表示放下的那个区域的数据
   handleMove(srcData, list) {

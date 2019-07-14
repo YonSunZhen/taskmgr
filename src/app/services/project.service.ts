@@ -12,7 +12,7 @@ export class ProjectService {
   })
   constructor(private http: HttpClient,@Inject('BASE_CONFIG') private config) { }
 
-  // POST
+  // POST(OK)
   add(project: Project): Observable<Project> {
     project.id = null;
     const uri = `${this.config.uri}/${this.domain}`;
@@ -23,7 +23,7 @@ export class ProjectService {
       )
   }
 
-  // PATCH
+  // PATCH(OK)
   update(project: Project): Observable<Project> {
     const uri = `${this.config.uri}/${this.domain}/${project.id}`;
     const toUpdate = {
@@ -52,7 +52,7 @@ export class ProjectService {
     )
   }
 
-  // GET
+  // GET(OK)
   get(userId: string): Observable<Project[]> {
     // const uri = `${this.config.uri}/${this.domain}?members_like=${userId}`;
     const uri = `${this.config.uri}/${this.domain}`;

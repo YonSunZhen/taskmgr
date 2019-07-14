@@ -14,8 +14,8 @@
     <app-task-header [header] = "list.name" 
     (onNewTask)="openNewTaskDialog()" 
     (onCopyTask)="openCopyTaskDialog()" 
-    (onDelTask)="openDelTaskDialog()"
-    (onEditList)="openEditListDialog()">
+    (onDelTask)="openDelTaskDialog(list)"
+    (onEditList)="openEditListDialog(list)">
 
     </app-task-header>
     <app-quick-task (quickTask)="handleQuickTask($event)"></app-quick-task>
