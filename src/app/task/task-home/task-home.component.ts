@@ -86,8 +86,10 @@ export class TaskHomeComponent implements OnInit {
         id: taskLists.id
       }
       this.taskListService$.update(data).subscribe(res => {
-        console.log('成功修改列表名!');
         console.log(res);
+        if(res.id){
+          console.log('成功修改列表名!');
+        }      
       })
     });
   }
@@ -116,11 +118,17 @@ export class TaskHomeComponent implements OnInit {
         console.log('handling item');
         break;
       case 'task-list':
-        console.log('handling list');
-        const srcList = srcData.data;
-        const tempOrder = srcList.order;
-        srcList.order = list.order;
-        list.order = tempOrder;
+        this.taskListService$.swapOrder(srcData.data,list).subscribe((res) => {
+          console.log(res);
+          if(res.length > 1) {
+            console.log("成功修改列表order");
+            console.log('handling list');
+            const srcList = srcData.data;
+            const tempOrder = srcList.order;
+            srcList.order = list.order;
+            list.order = tempOrder;
+          }
+        })
         break;
       default:
         break;

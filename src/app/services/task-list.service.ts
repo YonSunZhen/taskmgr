@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { TaskList } from '../domain';
-import { Observable } from 'rxjs';
-import { map, mapTo } from 'rxjs/operators';
+import { Observable, concat, merge } from 'rxjs';
+import { map, mapTo, reduce } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +45,7 @@ export class TaskListService {
       .delete(`${uri}/${this.domain}/${taskList.id}`)
       .pipe(mapTo(taskList))
   }
-  //PATCH
+  //PATCH(修改列表名称)
   update(taskList: TaskList): Observable<TaskList> {
     const uri = `${this.config.uri}/${this.domain}/${taskList.id}`;
     const toUpdate = {
@@ -56,6 +56,26 @@ export class TaskListService {
       .pipe(
         map(res => res as TaskList)
       )
+  }
+  //PATCH(修改列表排序)处理两条流
+  swapOrder(src: TaskList, target: TaskList): Observable<TaskList[]> {
+    const dragUri = `${this.config.uri}/${this.domain}/${src.id}`;
+    const dropUri = `${this.config.uri}/${this.domain}/${target.id}`;
+    //交换拖拽对象和目标对象的order
+    const drag$ = this.http
+      .patch(dragUri, JSON.stringify({order: target.order}),{headers: this.headers})
+      .pipe(
+        map(res => res as TaskList)
+      )
+    const drop$ = this.http
+      .patch(dropUri, JSON.stringify({order: src.order}),{headers: this.headers})
+      .pipe(
+        map(res => res as TaskList)
+      )
+    //合并两条流(不太明白？)
+    return merge(drag$,drop$).pipe(
+      reduce((x:TaskList[],y: TaskList) => [...x,y],[])
+    )
   }
 }
 
