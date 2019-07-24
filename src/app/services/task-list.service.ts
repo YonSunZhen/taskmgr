@@ -72,9 +72,13 @@ export class TaskListService {
       .pipe(
         map(res => res as TaskList)
       )
-    //合并两条流(不太明白？)
+    //合并两条流(不太明白？)reduce中第二个参数表示初始化这个值
+    //prev 表示上一次调用回调时的返回值，或者初始值 init;
+		//cur 表示当前正在处理的数组元素；
     return merge(drag$,drop$).pipe(
-      reduce((x:TaskList[],y: TaskList) => [...x,y],[])
+      reduce((prev:TaskList[],cur: TaskList) => {
+        return [...prev,cur];
+      },[])
     )
   }
 }
