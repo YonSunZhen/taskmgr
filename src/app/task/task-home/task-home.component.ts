@@ -5,6 +5,7 @@ import { CopyTaskComponent } from '../copy-task/copy-task.component';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { NewTaskListComponent } from '../new-task-list/new-task-list.component';
 import { TaskListService } from '../../services/task-list.service';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-task-home',
@@ -14,7 +15,9 @@ import { TaskListService } from '../../services/task-list.service';
 })
 export class TaskHomeComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private taskListService$: TaskListService) { }
+  constructor(public dialog: MatDialog, 
+              private taskListService$: TaskListService, 
+              private taskService$: TaskService) { }
   //这到底是什么意思？
   // @HostBinding('@routeAnim') state1;
   lists;
@@ -22,13 +25,47 @@ export class TaskHomeComponent implements OnInit {
   ngOnInit() {
     this.taskListService$.get('1').subscribe(lists => {
       this.lists = lists;
+      //自己的方法(初始化任务列表和列表数据)
+      for(let i = 0; i < this.lists.length; i++){
+        this.lists[i].tasks = [];
+        if(this.lists[i].taskIds) {
+          for(let j = 0; j < this.lists[i].taskIds.length; j++) {
+            this.taskService$.get(lists[i].taskIds[j]).subscribe(task => {
+              this.lists[i].tasks.push(task[0])
+            })
+          }
+        }
+      }
+      console.log("成功获取所有子任务");
+      console.log(this.lists);
     })
   }
   //打开新建任务对话框(增加任务)
-  openNewTaskDialog() {
+  openNewTaskDialog(listId) {
+    const dialogRef = this.dialog.open(NewTaskComponent,{
+      data: { }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('0000');
+      // console.log(result);
+      result.completed = false;
+      result.ownerId = "1";
+      result.taskListId = listId;
+      this.taskService$.add(result).subscribe(res => {
+        if(res.id){
+          // this.taskListService$.update() 这里有点问题，完成了增加任务，但是没能将任务id更新到taskList表中
+          console.log('成功添加任务');
+          console.log(res);
+        }
+      })
+    });
+  }
+
+  //打开修改任务对话框
+  openEditTaskDialog(task) {
     const dialogRef = this.dialog.open(NewTaskComponent,{
       data: {
-        "title":"新建任务:"
+        "tasks":task
       }
     });
     dialogRef.afterClosed().subscribe(result => console.log(result));
@@ -44,16 +81,6 @@ export class TaskHomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => console.log(result));
   }
 
-  //打开修改任务对话框
-  openEditTaskDialog(task) {
-    const dialogRef = this.dialog.open(NewTaskComponent,{
-      data: {
-        "title":"修改任务:",
-        "task":task
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => console.log(result));
-  }
 
   //打开删除列表对话框
   openDelTaskDialog(list) {

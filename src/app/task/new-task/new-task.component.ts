@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { ReactiveFormsModule, FormGroup, FormBuilder, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-new-task',
@@ -10,10 +11,11 @@ export class NewTaskComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) private data,
    //泛型？
-   private dialogRef: MatDialogRef<NewTaskComponent>) { }
+   private dialogRef: MatDialogRef<NewTaskComponent>,
+   private fb: FormBuilder) { }
 
-  title = '';
-
+  title: string;
+  form: FormGroup;
   priorityes = [
     {
       "label":"紧急",
@@ -30,13 +32,43 @@ export class NewTaskComponent implements OnInit {
   ]
 
   ngOnInit() {
-    // console.log(this.data);
-    this.title = this.data.title;
-    console.log(this.data.task);
+    // console.log(this.data.tasks);
+    if(this.data.tasks) {
+      this.form = this.fb.group({
+        desc: [this.data.tasks.desc],
+        priority: [this.data.tasks.priority],
+        dueDate: [this.data.tasks.dueDate],//截止日期
+        reminder: [this.data.tasks.reminder],//提醒日期
+        remark: [this.data.tasks.remark]
+      })
+      this.title = "修改任务:"
+    }else{
+      this.form = this.fb.group({
+        desc: [],
+        priority: [],
+        dueDate: [],
+        reminder: [],
+        remark: []
+      })
+      this.title = "新建任务:"
+    }
   }
 
-  onClick() {
-    this.dialogRef.close('收到了新建任务信息!');
+  onSubmit({value,valid},ev: Event) {
+    ev.preventDefault();
+    const desc = value.desc;
+    const priority = value.priority;
+    const dueDate = value.dueDate;
+    const reminder = value.reminder;
+    const remark = value.remark;
+    const data = {
+      'desc': desc,
+      'priority':priority,
+      'dueDate':dueDate,
+      'reminder':reminder,
+      'remark':remark
+    }
+    this.dialogRef.close(data);
   }
 
 }

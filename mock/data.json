@@ -175,33 +175,9 @@
       "name": "待办",
       "order": 1,
       "projectId": "1",
-      "tasks": [
-        {
-          "id": 1,
-          "desc": "任务一:去星巴克买杯咖啡1",
-          "completed": true,
-          "priority": 3,
-          "owner": {
-            "id": 1,
-            "name": "张三",
-            "avatar": "users-1"
-          },
-          "dueDate": "",
-          "reminder": ""
-        },
-        {
-          "id": 2,
-          "desc": "任务二:去星巴克买杯咖啡2机会的时候看姐夫好看电视剧符合贷款",
-          "completed": false,
-          "priority": 2,
-          "owner": {
-            "id": 2,
-            "name": "李四",
-            "avatar": "users-2"
-          },
-          "dueDate": "",
-          "reminder": "new Date()"
-        }
+      "taskIds": [
+        "1",
+        "2"
       ]
     },
     {
@@ -209,32 +185,9 @@
       "name": "进行中",
       "order": 2,
       "projectId": "1",
-      "tasks": [
-        {
-          "id": 1,
-          "desc": "任务三:去星巴克买杯咖啡2",
-          "completed": false,
-          "priority": 2,
-          "owner": {
-            "id": 1,
-            "name": "张三2",
-            "avatar": "users-3"
-          },
-          "dueDate": "",
-          "reminder": ""
-        },
-        {
-          "id": 2,
-          "desc": "任务四:去星巴克买杯咖啡2",
-          "completed": true,
-          "priority": 1,
-          "owner": {
-            "id": 2,
-            "name": "李四2",
-            "avatar": "users-4"
-          },
-          "dueDate": ""
-        }
+      "taskIds": [
+        "3",
+        "4"
       ]
     },
     {
@@ -242,6 +195,70 @@
       "order": 3,
       "projectId": "1",
       "id": 3
+    }
+  ],
+  "task": [
+    {
+      "id": 1,
+      "desc": "任务一:去星巴克买杯咖啡1",
+      "completed": true,
+      "priority": 3,
+      "owner": {
+        "id": 1,
+        "name": "张三",
+        "avatar": "users-1"
+      },
+      "dueDate": "",
+      "reminder": ""
+    },
+    {
+      "id": 2,
+      "desc": "任务二:去星巴克买杯咖啡2机会的时候看姐夫好看电视剧符合贷款",
+      "completed": false,
+      "priority": 2,
+      "owner": {
+        "id": 2,
+        "name": "李四",
+        "avatar": "users-2"
+      },
+      "dueDate": "",
+      "reminder": "new Date()"
+    },
+    {
+      "id": 3,
+      "desc": "任务三:去星巴克买杯咖啡2",
+      "completed": false,
+      "priority": 2,
+      "owner": {
+        "id": 1,
+        "name": "张三2",
+        "avatar": "users-3"
+      },
+      "dueDate": "",
+      "reminder": ""
+    },
+    {
+      "id": 4,
+      "desc": "任务四:去星巴克买杯咖啡2",
+      "completed": true,
+      "priority": 1,
+      "owner": {
+        "id": 2,
+        "name": "李四2",
+        "avatar": "users-4"
+      },
+      "dueDate": ""
+    },
+    {
+      "desc": "任务1",
+      "priority": 1,
+      "dueDate": "2018-06-19T16:00:00.000Z",
+      "reminder": "2019-08-25T16:00:00.000Z",
+      "remark": "备注1",
+      "completed": false,
+      "ownerId": "1",
+      "taskListId": 3,
+      "id": 5
     }
   ]
 }

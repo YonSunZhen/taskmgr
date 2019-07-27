@@ -25,7 +25,7 @@ export class TaskListService {
         map(res => res as TaskList)
       )
   }
-  //GET,根据项目id获取任务列表
+  //GET,根据项目id获取所有任务列表
   get(projectId: string): Observable<TaskList[]> {
     const uri = `${this.config.uri}/${this.domain}`;
     const params = new HttpParams().set('projectId', projectId);
@@ -72,7 +72,7 @@ export class TaskListService {
       .pipe(
         map(res => res as TaskList)
       )
-    //合并两条流(不太明白？)reduce中第二个参数表示初始化这个值
+    //合并两条流reduce中第二个参数表示初始化这个值
     //prev 表示上一次调用回调时的返回值，或者初始值 init;
 		//cur 表示当前正在处理的数组元素；
     return merge(drag$,drop$).pipe(

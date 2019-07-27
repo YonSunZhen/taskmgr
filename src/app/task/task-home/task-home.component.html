@@ -12,7 +12,7 @@
     [style.order]="list.order"
     *ngFor="let list of lists">
     <app-task-header [header] = "list.name" 
-    (onNewTask)="openNewTaskDialog()" 
+    (onNewTask)="openNewTaskDialog(list.id)" 
     (onCopyTask)="openCopyTaskDialog()" 
     (onDelTask)="openDelTaskDialog(list)"
     (onEditList)="openEditListDialog(list)">
