@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import { ReactiveFormsModule, FormGroup, FormBuilder, FormControl} from '@angular/forms';
 
@@ -16,6 +16,8 @@ export class NewTaskComponent implements OnInit {
 
   title: string;
   form: FormGroup;
+  delInvisible = true;//删除按钮是否显示(true不可用false可用)
+  notConfirm = true;//是否弹出确认框(true不弹出false弹出)
   priorityes = [
     {
       "label":"紧急",
@@ -41,7 +43,8 @@ export class NewTaskComponent implements OnInit {
         reminder: [this.data.tasks.reminder],//提醒日期
         remark: [this.data.tasks.remark]
       })
-      this.title = "修改任务:"
+      this.title = "修改任务:";
+      this.delInvisible = false;
     }else{
       this.form = this.fb.group({
         desc: [],
@@ -50,7 +53,8 @@ export class NewTaskComponent implements OnInit {
         reminder: [],
         remark: []
       })
-      this.title = "新建任务:"
+      this.title = "新建任务:";
+      this.delInvisible = true;
     }
   }
 
@@ -68,7 +72,22 @@ export class NewTaskComponent implements OnInit {
       'reminder':reminder,
       'remark':remark
     }
-    this.dialogRef.close(data);
+    this.dialogRef.close({
+      'type': 'update',
+      'task': data
+    });
+  }
+
+  //点击删除按钮，弹出确认框
+  onDelClick(confirm: boolean) {
+    this.notConfirm = confirm;
+  }
+  //点击确认删除按钮
+  reallyDel() {
+    this.dialogRef.close({
+      'type': 'delete',
+      'task': this.data.tasks
+    })
   }
 
 }

@@ -12,6 +12,7 @@ export class ServicesModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: ServicesModule,
+      //下面这些有什么用?
       providers: [
         QuoteService,
         ProjectService

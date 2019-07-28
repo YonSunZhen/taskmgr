@@ -46,12 +46,11 @@ export class TaskHomeComponent implements OnInit {
       data: { }
     });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('0000');
-      // console.log(result);
-      result.completed = false;
-      result.ownerId = "1";
-      result.taskListId = listId;
-      this.taskService$.add(result).subscribe(res => {
+      let data = result.task;
+      data.completed = false;
+      data.ownerId = "1";
+      data.taskListId = listId;
+      this.taskService$.add(data).subscribe(res => {
         if(res.id){
           // this.taskListService$.update() 这里有点问题，完成了增加任务，但是没能将任务id更新到taskList表中
           console.log('成功添加任务');
@@ -68,7 +67,37 @@ export class TaskHomeComponent implements OnInit {
         "tasks":task
       }
     });
-    dialogRef.afterClosed().subscribe(result => console.log(result));
+    dialogRef.afterClosed().subscribe(result => {
+      let type = result.type;
+      let data = result.task;
+      data.id = task.id;
+      if(type === "update") {
+        this.taskService$.updateDetail(data).subscribe(res => {
+          if(res.id){
+            console.log('成功修改任务详情');
+            console.log(res);
+          }
+        })
+      }else if(type === "delete") {
+        this.taskService$.del(data).subscribe(res => {
+          if(res.id){
+            console.log('成功删除任务');
+            console.log(res);
+          }
+        })
+      }
+    });
+  }
+
+  //修改任务的完成状态
+  handleCompleteTask(task) {
+    task.completed = !task.completed;
+    this.taskService$.updateCompleted(task).subscribe(res => {
+      if(res.id) {
+        console.log('成功修改任务状态');
+        console.log(res);
+      }
+    })
   }
 
   //打开移动列表对话框

@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Task } from '../domain';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Task, TaskList } from '../domain';
+import { Observable, from } from 'rxjs';
+import { map, mapTo, mergeMap, reduce } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -38,4 +38,50 @@ export class TaskService {
         map(res => res as Task)
       )
   }
+
+  //PATCH,修改任务详情
+  updateDetail(task: Task): Observable<Task> {
+    const uri = `${this.config.uri}/${this.domain}/${task.id}`;
+    const toUpdate = {
+      desc: task.desc,
+      priority: task.priority,
+      dueDate: task.dueDate,
+      reminder: task.reminder,
+      remark: task.remark
+    }
+    return this.http
+      .patch(uri, JSON.stringify(toUpdate),{headers: this.headers})
+      .pipe(map(res => res as Task))
+  }
+
+  //PATCH,修改任务完成状态
+  updateCompleted(task: Task): Observable<Task> {
+    const uri = `${this.config.uri}/${this.domain}/${task.id}`;
+    const toUpdate = {
+      completed: task.completed
+    }
+    return this.http
+      .patch(uri, JSON.stringify(toUpdate),{headers: this.headers})
+      .pipe(map(res => res as Task))
+  }
+
+  //DELETE,删除任务
+  del(task: Task): Observable<Task> {
+    const uri = `${this.config.uri}`;
+    //这样返回的是删除的数据
+    return this.http
+      .delete(`${uri}/${this.domain}/${task.id}`)
+      .pipe(mapTo(task))
+  }
+
+  //获取所有任务
+  getByLists(lists: TaskList[]): Observable<Task[]> {
+    return from(lists)
+      .pipe(
+        mergeMap(list => this.get(list.id)),
+        reduce((tasks: Task[], t: Task[]) => [...tasks, ...t], [])
+      )
+  }
+
+
 }

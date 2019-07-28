@@ -42,7 +42,7 @@ export class ProjectItemComponent implements OnInit {
     this.onEdit.emit();
   }
 
-  onInviteDelete() {
+  onDeleteClick() {
     this.onDelete.emit();
   }
 

@@ -10,7 +10,7 @@
   [dragTag]="'task-item'"
   [dragData]="item"
   (click)="onItemClick()">
-  <mat-checkbox class="completion-status" [checked]="item.completed" (click)="onCheckBoxClick($event)"></mat-checkbox>
+  <mat-checkbox class="completion-status" [checked]="item.completed" (click)="onCheckBoxClick($event)" (change)="checkboxChanged()"></mat-checkbox>
   <div mat-line class="content" [ngClass]="{'completed': item.completed}">
     <span [matTooltip]="item.desc">{{item.desc}}</span>
   </div>

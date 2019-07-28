@@ -31,8 +31,17 @@
 
 
   </div>
-  <div mat-dialog-actions>
+  <div mat-dialog-actions *ngIf="notConfirm else confirm">
     <button mat-raised-button color="parimary" type="submit">保存</button>
     <button mat-button type="button" mat-dialog-close>关闭</button>
+    <button mat-button color="warn" type="button" [disabled]="delInvisible" (click)="onDelClick(false)">删除</button>
   </div>
+  <ng-template #confirm>
+    <div fxLayout="row">
+      <span class="fill-remaining-space mat-body-2">是否确定删除？</span>
+      <button mat-button color="warn" type="button" (click)="reallyDel()">确定</button>
+      <button mat-raised-button color="primary" type="button" (click)="onDelClick(true)">取消</button>
+    </div>
+  </ng-template>
+  
 </form>

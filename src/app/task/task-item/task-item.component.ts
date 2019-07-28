@@ -14,6 +14,7 @@ export class TaskItemComponent implements OnInit {
 
   @Input() item;
   @Output() taskClick = new EventEmitter<void>();
+  @Output() taskComplete = new EventEmitter<void>();
   widerPriority = 'in';
   constructor() { }
 
@@ -22,6 +23,9 @@ export class TaskItemComponent implements OnInit {
 
   onItemClick() {
     this.taskClick.emit();
+  }
+  checkboxChanged() {
+    this.taskComplete.emit();
   }
 
   //阻止checkbox的事件冒泡

@@ -19,7 +19,11 @@
 
     </app-task-header>
     <app-quick-task (quickTask)="handleQuickTask($event)"></app-quick-task>
-    <app-task-item *ngFor="let task of list.tasks" [item]="task" (taskClick)="openEditTaskDialog(task)">
+    <app-task-item 
+      *ngFor="let task of list.tasks" 
+      [item]="task" 
+      (taskClick)="openEditTaskDialog(task)"
+      (taskComplete)="handleCompleteTask(task)">
 
     </app-task-item>
   </app-task-list>
