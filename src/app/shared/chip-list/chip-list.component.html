@@ -1,0 +1,23 @@
+<div [formGroup]="form">
+  <span>haha</span>
+  <mat-form-field>
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip
+        selected="true"
+        *ngFor="let member of items"
+        (removed)="removeMember(member)">
+        {{member.name}}
+        <mat-icon matChipRemove *ngIf="displayInput">cancel</mat-icon>
+      </mat-chip>
+      <input
+        [placeholder]="placeholderText"
+        [matAutocomplete]="auto"
+        formControlName="memberSearch">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayUser" (optionSelected)="handleMemberSelection($event)">
+      <mat-option *ngFor="let item of memberResults$ | async" [value]="item">
+        {{item.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>

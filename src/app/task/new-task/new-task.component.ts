@@ -41,7 +41,8 @@ export class NewTaskComponent implements OnInit {
         priority: [this.data.tasks.priority],
         dueDate: [this.data.tasks.dueDate],//截止日期
         reminder: [this.data.tasks.reminder],//提醒日期
-        remark: [this.data.tasks.remark]
+        remark: [this.data.tasks.remark],
+        chips: ['']
       })
       this.title = "修改任务:";
       this.delInvisible = false;
@@ -51,7 +52,8 @@ export class NewTaskComponent implements OnInit {
         priority: [],
         dueDate: [],
         reminder: [],
-        remark: []
+        remark: [],
+        chips: []
       })
       this.title = "新建任务:";
       this.delInvisible = true;
