@@ -14,6 +14,10 @@ export class NewTaskComponent implements OnInit {
    private dialogRef: MatDialogRef<NewTaskComponent>,
    private fb: FormBuilder) { }
 
+  performerLabel = "更改执行者";
+
+  participantLabel = "更改参与者";
+
   title: string;
   form: FormGroup;
   delInvisible = true;//删除按钮是否显示(true不可用false可用)
@@ -42,7 +46,8 @@ export class NewTaskComponent implements OnInit {
         dueDate: [this.data.tasks.dueDate],//截止日期
         reminder: [this.data.tasks.reminder],//提醒日期
         remark: [this.data.tasks.remark],
-        chips: ['']
+        performerChips: [''],
+        participantChips: ['']
       })
       this.title = "修改任务:";
       this.delInvisible = false;
@@ -53,7 +58,8 @@ export class NewTaskComponent implements OnInit {
         dueDate: [],
         reminder: [],
         remark: [],
-        chips: []
+        performerChips: [],
+        participantChips: []
       })
       this.title = "新建任务:";
       this.delInvisible = true;

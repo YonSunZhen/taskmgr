@@ -1,4 +1,20 @@
 {
+  "user": [
+    {
+      "name": "syz",
+      "password": "1995",
+      "email": "1315976441@qq.com",
+      "id": "1",
+      "avatar": "users-1.svg"
+    },
+    {
+      "name": "haha",
+      "password": "1996",
+      "email": "1315976441@qq.com",
+      "id": "2",
+      "avatar": "users-2.svg"
+    }
+  ],
   "quotes": [
     {
       "id": "0",
@@ -209,7 +225,8 @@
       "name": "已完成",
       "order": 3,
       "projectId": "1",
-      "id": 3
+      "id": 3,
+      "taskIds": [ ]
     }
   ],
   "task": [
@@ -248,11 +265,8 @@
       "desc": "任务三:去星巴克买杯咖啡2",
       "completed": false,
       "priority": 2,
-      "owner": {
-        "id": 1,
-        "name": "张三2",
-        "avatar": "users-3"
-      },
+      "ownerId": "1",
+      "participantsIds": ["1","2"],
       "dueDate": "2018-06-19T16:00:00.000Z",
       "reminder": "2019-08-25T16:00:00.000Z",
       "remark": "备注3",
@@ -281,7 +295,7 @@
       "remark": "111",
       "completed": false,
       "ownerId": "1",
-      "taskListId": 3,
+      "taskListId": "3",
       "id": 5
     }
   ]

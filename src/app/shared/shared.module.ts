@@ -94,7 +94,8 @@ import { ChipListComponent } from './chip-list/chip-list.component';
     FormsModule,
     ReactiveFormsModule,
     ImageListSelectComponent,//导出自定义的表单控件
-    AgeInputComponent
+    AgeInputComponent,
+    ChipListComponent
   ]
 })
 export class SharedModule { }

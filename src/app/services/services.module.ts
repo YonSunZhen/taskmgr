@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuoteService } from './quote.service';
 import { ProjectService } from './project.service';
+import { UserService } from './user.service';
 
 @NgModule({
   // imports: [
@@ -15,7 +16,8 @@ export class ServicesModule {
       //下面这些有什么用?
       providers: [
         QuoteService,
-        ProjectService
+        ProjectService,
+        UserService
       ]
     }
   }

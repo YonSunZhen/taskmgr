@@ -36,6 +36,13 @@ export class TaskHomeComponent implements OnInit {
           }
         }
       }
+      // console.log('0000');
+      // console.log(lists);
+      // this.taskService$.getByLists(lists).subscribe(res => {
+      //   console.log('11111');
+      //   console.log(res);
+      //   this.lists = res;
+      // })
       console.log("成功获取所有子任务");
       console.log(this.lists);
     })

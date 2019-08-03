@@ -10,7 +10,13 @@
       </mat-radio-button>
     </mat-radio-group>
 
-    <!-- <app-chip-list formControlName="chips"></app-chip-list> -->
+    <div style="margin-top:15px;">
+      <app-chip-list 
+        formControlName="performerChips" 
+        [multiple]="false" 
+        [label]="performerLabel">
+      </app-chip-list>
+    </div>
 
     <mat-form-field class="full-width">
       <input matInput [matDatepicker]="dueDatepicker"  placeholder="任务截止日期" formControlName="dueDate">
@@ -26,6 +32,12 @@
       <mat-datepicker #reminderDatepicker></mat-datepicker>
     </mat-form-field>
     <!-- <button type="button" matSuffix [for]="reminderDatepicker"></button> -->
+
+    <app-chip-list 
+      formControlName="participantChips" 
+      [multiple]="true" 
+      [label]="participantLabel">
+    </app-chip-list>
 
     <mat-form-field class="full-width">
       <input matInput type="text" placeholder="备注" formControlName="remark">
