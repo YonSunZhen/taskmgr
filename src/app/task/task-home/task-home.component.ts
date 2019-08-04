@@ -6,6 +6,7 @@ import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dial
 import { NewTaskListComponent } from '../new-task-list/new-task-list.component';
 import { TaskListService } from '../../services/task-list.service';
 import { TaskService } from '../../services/task.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-task-home',
@@ -17,7 +18,8 @@ export class TaskHomeComponent implements OnInit {
 
   constructor(public dialog: MatDialog, 
               private taskListService$: TaskListService, 
-              private taskService$: TaskService) { }
+              private taskService$: TaskService,
+              private userService$: UserService) { }
   //这到底是什么意思？
   // @HostBinding('@routeAnim') state1;
   lists;
@@ -28,12 +30,22 @@ export class TaskHomeComponent implements OnInit {
       //自己的方法(初始化任务列表和列表数据)
       for(let i = 0; i < this.lists.length; i++){
         this.lists[i].tasks = [];
-        if(this.lists[i].taskIds) {
+        if(this.lists[i].taskIds.length > 0) {
+
           for(let j = 0; j < this.lists[i].taskIds.length; j++) {
             this.taskService$.get(lists[i].taskIds[j]).subscribe(task => {
-              this.lists[i].tasks.push(task[0])
+              // console.log('000000');
+              // console.log(task);
+              const ownerId = task[0].ownerId;
+              let data = JSON.parse(JSON.stringify(task[0]));
+              this.userService$.getById(ownerId).subscribe(user => {
+                data.owner = user[0];
+              })
+              this.lists[i].tasks.push(data);
             })
           }
+
+
         }
       }
       // console.log('0000');

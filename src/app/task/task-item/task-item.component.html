@@ -20,5 +20,5 @@
     </span>
     <mat-icon *ngIf="item.reminder">alarm</mat-icon>
   </div>
-  <mat-icon class="avatar" [svgIcon]="item.owner.avatar" mat-list-avatar></mat-icon>
+  <mat-icon class="avatar" *ngIf="item.owner" [svgIcon]="item.owner.avatar" mat-list-avatar></mat-icon>
 </mat-list-item>

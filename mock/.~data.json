@@ -5,14 +5,14 @@
       "password": "1995",
       "email": "1315976441@qq.com",
       "id": "1",
-      "avatar": "users-1"
+      "avatar": "users-1.svg"
     },
     {
       "name": "haha",
       "password": "1996",
       "email": "1315976441@qq.com",
       "id": "2",
-      "avatar": "users-2"
+      "avatar": "users-2.svg"
     }
   ],
   "quotes": [
@@ -226,7 +226,7 @@
       "order": 3,
       "projectId": "1",
       "id": 3,
-      "taskIds": [ ]
+      "taskIds": []
     }
   ],
   "task": [
@@ -235,7 +235,11 @@
       "desc": "任务一:去星巴克买杯咖啡11",
       "completed": true,
       "priority": 3,
-      "ownerId": "1",
+      "owner": {
+        "id": 1,
+        "name": "张三",
+        "avatar": "users-1"
+      },
       "dueDate": "2018-05-31T16:00:00.000Z",
       "reminder": "2019-08-25T16:00:00.000Z",
       "remark": "备注1111",
@@ -244,9 +248,13 @@
     {
       "id": 2,
       "desc": "任务二:去星巴克买杯咖啡2机会的时候看姐夫好看电视剧符合贷款",
-      "completed": false,
+      "completed": true,
       "priority": 1,
-      "ownerId": "2",
+      "owner": {
+        "id": 2,
+        "name": "李四",
+        "avatar": "users-2"
+      },
       "dueDate": "2018-06-19T16:00:00.000Z",
       "reminder": "2019-08-25T16:00:00.000Z",
       "remark": "备注2",
@@ -255,7 +263,7 @@
     {
       "id": 3,
       "desc": "任务三:去星巴克买杯咖啡2",
-      "completed": true,
+      "completed": false,
       "priority": 2,
       "ownerId": "1",
       "participantsIds": [
@@ -270,9 +278,13 @@
     {
       "id": 4,
       "desc": "任务四:去星巴克买杯咖啡2",
-      "completed": false,
+      "completed": true,
       "priority": 1,
-      "ownerId": "2",
+      "owner": {
+        "id": 2,
+        "name": "李四2",
+        "avatar": "users-4"
+      },
       "dueDate": "2018-06-19T16:00:00.000Z",
       "reminder": "2019-08-25T16:00:00.000Z",
       "remark": "备注44",

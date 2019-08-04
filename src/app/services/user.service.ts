@@ -13,6 +13,17 @@ export class UserService {
 
   constructor(private http: HttpClient,@Inject('BASE_CONFIG') private config) { }
 
+  //根据用户id获取用户数据
+  getById(id: string): Observable<User> {
+    const uri = `${this.config.uri}/${this.domain}`;
+    const params = new HttpParams().set('id', id);
+    return this.http
+      .get(uri, {params})
+      .pipe(
+        map(res => res as User)
+      )
+  }
+
   //根据email模糊搜索用户数据
   searchUsers(filter: string): Observable<User[]> {
     const uri = `${this.config.uri}/${this.domain}`;

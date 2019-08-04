@@ -16,21 +16,15 @@ export class TaskService {
   constructor(private http: HttpClient, @Inject('BASE_CONFIG') private config) { }
 
   //GET,根据任务id获取任务详情
-  get1(taskListId: string): Observable<Task[]> {
+  get1(taskListId: string) {
     const uri = `${this.config.uri}/${this.domain}`;
     const params = new HttpParams().set('taskListId', taskListId);
     return this.http
       .get(uri,{
         params:params
       })
-      .pipe(
-        map(res => {
-          console.log('haha');
-          console.log(res);
-          return res as Task[];
-        })
-      )
   }
+
   get(id: string): Observable<Task[]> {
     const uri = `${this.config.uri}/${this.domain}`;
     const params = new HttpParams().set('id', id);
@@ -40,8 +34,8 @@ export class TaskService {
       })
       .pipe(
         map(res => {
-          console.log('haha');
-          console.log(res);
+          // console.log('haha');
+          // console.log(res);
           return res as Task[];
         })
       )
@@ -94,6 +88,19 @@ export class TaskService {
   }
 
   //获取所有任务(如何使用rxjs进行数据扩展和拼接)
+  // getByLists(lists: TaskList[]): Observable<any> {
+  //   let array = [];
+  //   return from(lists)
+  //     .pipe(
+  //       map(x => {
+  //         this.get1(x.id).subscribe(res => {
+  //           console.log('2222222');
+  //           console.log(res);
+  //           return this.get1(x.id);
+  //         })
+  //       })
+  //     )
+  // }
   getByLists(lists: TaskList[]): Observable<any> {
     return from(lists)
       .pipe(

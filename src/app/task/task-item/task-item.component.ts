@@ -12,13 +12,14 @@ import { itemAnim } from '../../animation/item.anim';
 })
 export class TaskItemComponent implements OnInit {
 
-  @Input() item;
+  @Input() item:any;
   @Output() taskClick = new EventEmitter<void>();
   @Output() taskComplete = new EventEmitter<void>();
   widerPriority = 'in';
   constructor() { }
 
   ngOnInit() {
+    
   }
 
   onItemClick() {
