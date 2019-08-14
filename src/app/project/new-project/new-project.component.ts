@@ -50,6 +50,8 @@ export class NewProjectComponent implements OnInit {
     const name = value.name;
     const desc = value.desc;
     const coverImg = value.coverImg;
+    // console.log('333333333');
+    // console.log(coverImg);
     const data = {
       'name': name,
       'desc': desc,

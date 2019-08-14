@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import { ReactiveFormsModule, FormGroup, FormBuilder, FormControl} from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormBuilder, FormControl,Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-new-task',
@@ -38,22 +38,21 @@ export class NewTaskComponent implements OnInit {
   ]
 
   ngOnInit() {
-    // console.log(this.data.tasks);
     if(this.data.tasks) {
       this.form = this.fb.group({
-        desc: [this.data.tasks.desc],
+        desc: [this.data.tasks.desc,Validators.compose([Validators.required, Validators.maxLength(20)])],
         priority: [this.data.tasks.priority],
         dueDate: [this.data.tasks.dueDate],//截止日期
         reminder: [this.data.tasks.reminder],//提醒日期
         remark: [this.data.tasks.remark],
-        performerChips: [''],
-        participantChips: ['']
+        performerChips: [this.data.tasks.owner],
+        participantChips: [this.data.tasks.participants]
       })
       this.title = "修改任务:";
       this.delInvisible = false;
     }else{
       this.form = this.fb.group({
-        desc: [],
+        desc: ['',Validators.compose([Validators.required, Validators.maxLength(20)])],
         priority: [],
         dueDate: [],
         reminder: [],
@@ -68,11 +67,18 @@ export class NewTaskComponent implements OnInit {
 
   onSubmit({value,valid},ev: Event) {
     ev.preventDefault();
-    const desc = value.desc;
-    const priority = value.priority;
-    const dueDate = value.dueDate;
-    const reminder = value.reminder;
-    const remark = value.remark;
+    let desc = value.desc;
+    let priority = value.priority;
+    let dueDate = value.dueDate;
+    let reminder = value.reminder;
+    let remark = value.remark;
+    let owner = value.performerChips;
+    let participants = value.participantChips;
+    console.log('00000');
+    console.log(owner);
+    
+    console.log('111111');
+    console.log(participants);
     const data = {
       'desc': desc,
       'priority':priority,

@@ -60,7 +60,9 @@ export class TaskService {
       priority: task.priority,
       dueDate: task.dueDate,
       reminder: task.reminder,
-      remark: task.remark
+      remark: task.remark,
+      ownerId: task.ownerId,
+      participantsIds: task.participantsIds
     }
     return this.http
       .patch(uri, JSON.stringify(toUpdate),{headers: this.headers})
@@ -77,6 +79,17 @@ export class TaskService {
       .patch(uri, JSON.stringify(toUpdate),{headers: this.headers})
       .pipe(map(res => res as Task))
   }
+
+  //PATCH,修改任务创建者
+  // updateOwner(task: Task): Observable<Task> {
+  //   const uri = `${this.config.uri}/${this.domain}/${task.id}`;
+  //   const toUpdate = {
+  //     ownerId: task.ownerId
+  //   }
+  //   return this.http
+  //     .patch(uri, JSON.stringify(toUpdate),{headers: this.headers})
+  //     .pipe(map(res => res as Task))
+  // }
 
   //DELETE,删除任务
   del(task: Task): Observable<Task> {

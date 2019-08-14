@@ -102,7 +102,7 @@
       "id": "3",
       "name": "企业协作平台",
       "desc": "这是一个企业内部项目",
-      "coverImg": "/assets/images/covers/0.jpg",
+      "coverImg": "/assets/images/covers/3.jpg",
       "members": [
         "1",
         "2"
@@ -120,7 +120,7 @@
     {
       "name": "5",
       "desc": "5",
-      "coverImg": "/assets/images/covers/14_tn.jpg",
+      "coverImg": "/assets/images/covers/27.jpg",
       "id": "J5TcKWD",
       "members": [
         "1",
@@ -178,7 +178,7 @@
     {
       "name": "3",
       "desc": "4",
-      "coverImg": "/assets/images/covers/3.jpg",
+      "coverImg": "/assets/images/covers/5.jpg",
       "members": [
         "1"
       ],
@@ -226,7 +226,7 @@
       "order": 3,
       "projectId": "1",
       "id": 3,
-      "taskIds": [ ]
+      "taskIds": []
     }
   ],
   "task": [
@@ -236,6 +236,10 @@
       "completed": true,
       "priority": 3,
       "ownerId": "1",
+      "participantsIds": [
+        "1",
+        "2"
+      ],
       "dueDate": "2018-05-31T16:00:00.000Z",
       "reminder": "2019-08-25T16:00:00.000Z",
       "remark": "备注1111",
@@ -247,6 +251,10 @@
       "completed": false,
       "priority": 1,
       "ownerId": "2",
+      "participantsIds": [
+        "1",
+        "2"
+      ],
       "dueDate": "2018-06-19T16:00:00.000Z",
       "reminder": "2019-08-25T16:00:00.000Z",
       "remark": "备注2",
@@ -256,7 +264,7 @@
       "id": 3,
       "desc": "任务三:去星巴克买杯咖啡2",
       "completed": true,
-      "priority": 2,
+      "priority": 3,
       "ownerId": "1",
       "participantsIds": [
         "1",
@@ -264,7 +272,7 @@
       ],
       "dueDate": "2018-06-19T16:00:00.000Z",
       "reminder": "2019-08-25T16:00:00.000Z",
-      "remark": "备注3",
+      "remark": "备注333",
       "taskListId": "2"
     },
     {
@@ -273,6 +281,10 @@
       "completed": false,
       "priority": 1,
       "ownerId": "2",
+      "participantsIds": [
+        "1",
+        "2"
+      ],
       "dueDate": "2018-06-19T16:00:00.000Z",
       "reminder": "2019-08-25T16:00:00.000Z",
       "remark": "备注44",

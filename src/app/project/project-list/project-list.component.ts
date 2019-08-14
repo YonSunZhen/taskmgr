@@ -73,9 +73,9 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     });
   }
   //打开邀请对话框
-  openInviteDialog() {
+  openInviteDialog(project) {
     const dialogRef = this.dialog.open(InviteComponent,{
-      data: {data: "这是邀请框"}
+      data: project
     });
     dialogRef.afterClosed().subscribe(result => console.log(result));
   }

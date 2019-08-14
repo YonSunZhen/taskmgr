@@ -40,6 +40,7 @@ export class ImageListSelectComponent implements ControlValueAccessor {
 
   //将新值写入元素(初始页面时把控件的值写进表单)
   writeValue(obj: any): void {
+    // console.log('执行了writeValue');
     this.selected = obj;
     console.log("write");
     console.log(obj);

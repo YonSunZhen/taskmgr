@@ -34,13 +34,19 @@ export class TaskHomeComponent implements OnInit {
 
           for(let j = 0; j < this.lists[i].taskIds.length; j++) {
             this.taskService$.get(lists[i].taskIds[j]).subscribe(task => {
-              // console.log('000000');
-              // console.log(task);
               const ownerId = task[0].ownerId;
+              const participantsIds = JSON.parse(JSON.stringify(task[0].participantsIds));
               let data = JSON.parse(JSON.stringify(task[0]));
+              data.participants = [];
+              data.owner = [];
               this.userService$.getById(ownerId).subscribe(user => {
-                data.owner = user[0];
+                data.owner.push(user[0]);
               })
+              for(let i = 0; i < participantsIds.length; i++) {
+                this.userService$.getById(participantsIds[i]).subscribe(user => {
+                  data.participants.push(user[0]);
+                })
+              }
               this.lists[i].tasks.push(data);
             })
           }

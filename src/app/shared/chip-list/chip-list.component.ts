@@ -1,5 +1,5 @@
 import { Component,  forwardRef, OnInit, Input, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormGroup, FormBuilder } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { User } from 'src/app/domain';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs/operators';
@@ -31,10 +31,14 @@ export class ChipListComponent implements OnInit, ControlValueAccessor {
   @ViewChild('memberInput') memberInput: ElementRef<HTMLInputElement>;
   form: FormGroup;
   isDisabled: boolean;//是否启用输入框(true不可用false可用)
+  // get isDisabled() {
+  //   return this.multiple || this.items.length === 0;
+  // }
   memberResults$: Observable<User[]>;
   items: Array<User> = [];//已选中的了
   
   constructor(private fb:FormBuilder, private service: UserService) { }
+  private propagateChange = (_: any) => {};
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -50,41 +54,80 @@ export class ChipListComponent implements OnInit, ControlValueAccessor {
       )
   }
 
+  //这是首次载入时才执行还是？
   writeValue(obj: any): void {
-    
+    // if(obj) {
+    //   for(let i = 0; i < obj.length; i++) {
+    //     this.items.push(obj[i]);
+    //   }
+    // }
+    // if(!this.multiple) {
+    //   if(this.items.length == 1) {
+    //     this.isDisabled = true;
+    //   }
+    // }
+    console.log('333333');
+    console.log(obj);
+    if(this.multiple) {
+      // console.log('444444');
+      // const userEntities = obj.reduce((e,c) => ({...e,c}), {});
+      // console.log(userEntities);
+      // const remaining = this.items.filter(item => !userEntities[item.id]);
+      // console.log('555555');
+      // console.log(remaining);
+      //扩展运算符针对的是数组
+      // this.items = [...remaining, ...obj];
+      console.log('22222');
+      console.log(obj.length);
+      for(let i = 0; i < obj.length; i++) {
+        console.log('444444');
+        this.items.push(obj[i]);
+        console.log('555555');
+      }
+      console.log('6666666');
+      console.log(this.items);
+    }else{
+      this.items = [...obj];
+      if(this.items.length == 1) {
+        this.isDisabled = true;
+      }
+      console.log('777777');
+    }
   }
 
   registerOnChange(fn: any): void {
-    
+    this.propagateChange = fn;
   }
 
   registerOnTouched(fn: any): void { }
 
   //点击删除
   removeMember(name: string) {
-    console.log("点击了删除");
+    // console.log("点击了删除");
     let index = -1;
     for(let i = 0; i < this.items.length; i++) {
+      //如果要删除的项刚好在items中的话
       if(this.items[i].name === name) {
         index = i;
       }
     }
     if (index > -1) {
       this.items.splice(index, 1);
-    }
-    //如果是不可以多选
-    if(!this.multiple) {
-      if(this.items.length == 0) {
-        this.isDisabled = false;
+      //如果是不可以多选
+      if(!this.multiple) {
+        if(this.items.length == 0) {
+          this.isDisabled = false;
+        }
       }
+      // this.form.patchValue({memberSearch: ''});
+      this.propagateChange(this.items);
     }
+    
   }
 
   handleMemberSelection(event: MatAutocompleteSelectedEvent) {
     //存在就不管
     //不存在就加入
-    console.log("点击了选中");
-    console.log(event.option.value);
     let state = 0;//表示不存在
     const selectedItem = event.option.value;
     for(let i = 0; i < this.items.length; i++) {
@@ -99,9 +142,11 @@ export class ChipListComponent implements OnInit, ControlValueAccessor {
         this.items.push(selectedItem);  
         this.isDisabled = true;
         this.memberInput.nativeElement.value = '';//将输入框的内容清除
+        this.propagateChange(this.items);
       }else{
-        this.items.push(selectedItem);  
+        this.items.push(selectedItem); 
         this.memberInput.nativeElement.value = '';//将输入框的内容清除
+        this.propagateChange(this.items);
         // this.form.patchValue({memberSearch: selectedItem.name});
       }
     }else{
@@ -109,6 +154,12 @@ export class ChipListComponent implements OnInit, ControlValueAccessor {
       return;
     }
     
+  }
+
+  validate(c: FormControl): {[key: string]: any} {
+    return this.items ? null : {
+      chipListInvalid: true
+    };
   }
 
 
