@@ -1,35 +1,42 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit(form,$event)">
   <mat-card>
-    <mat-card-header>
-      <mat-card-title>注册:</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-form-field class="full-width">
-        <input matInput type="text" placeholder="您的email" formControlName="email">
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput type="text" placeholder="您的姓名" formControlName="name">
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput type="password" placeholder="您的密码" formControlName="password">
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput type="password" placeholder="再次输入密码" formControlName="repeat">
-      </mat-form-field>
-      <app-image-list-select
-        [useSvgIcon]="true"
-        [cols]="6"
-        [title]="'选择头像:'"
-        [items]="avatar"
-        formControlName="avatar">
-      </app-image-list-select>
-      <app-age-input formControlName="dateOfBirth">
-      </app-age-input>
-      <button mat-raised-button color="parimary" type="submit">注册</button>
-    </mat-card-content>
-    <mat-card-actions class="text-right">
-      <p>已有账户？<a [routerLink]="['/login']">登录</a></p>
-      <!-- <p>忘记密码？<a href="">找回</a></p> -->
-    </mat-card-actions>
+    <mat-tab-group>
+      <mat-tab label="账号信息"> 
+        <mat-card-header>
+          <mat-card-title></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="您的email" formControlName="email">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="您的姓名" formControlName="name">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput type="password" placeholder="您的密码" formControlName="password">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput type="password" placeholder="再次输入密码" formControlName="repeat">
+          </mat-form-field>
+          <app-image-list-select
+            [useSvgIcon]="true"
+            [cols]="6"
+            [title]="'选择头像:'"
+            [items]="avatar"
+            formControlName="avatar">
+          </app-image-list-select>
+          <button mat-raised-button color="parimary" type="submit">注册</button>
+        </mat-card-content>
+        <mat-card-actions class="text-right">
+          <p>已有账户？<a [routerLink]="['/login']">登录</a></p>
+          <!-- <p>忘记密码？<a href="">找回</a></p> -->
+        </mat-card-actions>
+      </mat-tab>
+      <mat-tab label="个人信息">
+        <app-identity-input></app-identity-input>
+        <app-age-input formControlName="dateOfBirth"></app-age-input>
+      </mat-tab>
+    </mat-tab-group>
+    
   </mat-card>
 </form>

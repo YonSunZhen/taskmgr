@@ -1,0 +1,15 @@
+<div style="margin-top: 20px;">
+  <mat-form-field>
+    <mat-label>证件类型</mat-label>
+    <mat-select (selectionChange)="onIdTypeChange($event.value)"> 
+      <mat-option *ngFor="let type of identityTypes" [value]="type.value">
+        {{type.label}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="id-input">
+  <mat-form-field class="full-width">
+    <input matInput placeholder="证件号码" (selectionChange)="onIdNoChange($event.target.value)">
+  </mat-form-field>
+</div>

@@ -22,19 +22,22 @@ import {
   MatNativeDateModule,
   MatSelectModule,
   MatButtonToggleModule,
-  MatChipsModule
+  MatChipsModule,
+  MatTabsModule
 } from '@angular/material';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { DirectiveModule } from '../directive/directive.module';
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
 import { AgeInputComponent } from './age-input/age-input.component';
 import { ChipListComponent } from './chip-list/chip-list.component';
+import { IdentityInputComponent } from './identity-input/identity-input.component';
+import { AreaListComponent } from './area-list/area-list.component';
 //SharedModule作为中间模块
 @NgModule({
   declarations: [
     ConfirmDialogComponent, 
     ImageListSelectComponent, 
-    AgeInputComponent, ChipListComponent
+    AgeInputComponent, ChipListComponent, IdentityInputComponent, AreaListComponent
   ],
   entryComponents: [
     ConfirmDialogComponent
@@ -62,6 +65,7 @@ import { ChipListComponent } from './chip-list/chip-list.component';
     MatSelectModule,
     MatButtonToggleModule,
     MatChipsModule,
+    MatTabsModule,
     DirectiveModule,
     FormsModule,
     ReactiveFormsModule
@@ -90,12 +94,15 @@ import { ChipListComponent } from './chip-list/chip-list.component';
     MatSelectModule,
     MatButtonToggleModule,
     MatChipsModule,
+    MatTabsModule,
     DirectiveModule,
     FormsModule,
     ReactiveFormsModule,
     ImageListSelectComponent,//导出自定义的表单控件
     AgeInputComponent,
-    ChipListComponent
+    ChipListComponent,
+    IdentityInputComponent,
+    AreaListComponent
   ]
 })
 export class SharedModule { }
