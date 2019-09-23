@@ -12,7 +12,7 @@ export interface  Address {
   street?: string;
 }
 export interface Identity {
-  identityNo: string;
+  identityNo: string; // 证件号码
   identityType: IdentityType;
 }
 export interface User {

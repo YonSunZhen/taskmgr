@@ -33,8 +33,9 @@
         </mat-card-actions>
       </mat-tab>
       <mat-tab label="个人信息">
-        <app-identity-input></app-identity-input>
+        <app-identity-input formControlName="identity"></app-identity-input>
         <app-age-input formControlName="dateOfBirth"></app-age-input>
+        <app-area-list ></app-area-list>
       </mat-tab>
     </mat-tab-group>
     
