@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, forwardRef, ChangeDetectionStrategy } fro
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { IdentityType, Identity } from '../../domain/index';
 import { Subject, Observable, combineLatest, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-identity-input',
@@ -13,6 +14,7 @@ import { Subject, Observable, combineLatest, Subscription } from 'rxjs';
       useExisting: forwardRef(() => IdentityInputComponent),
       multi: true
     },
+    // 自定义添加验证器切记
     {
       provide: NG_VALIDATORS,
       useExisting: forwardRef(() => IdentityInputComponent),
@@ -49,16 +51,22 @@ export class IdentityInputComponent implements OnInit, OnDestroy, ControlValueAc
   constructor() { }
 
   ngOnInit() {
-    const val$ = combineLatest(this.idNo, this.idType, (_no, _type) => {
-      return {
-        identityType: _type,
-        identityNo: _no
-      };
-    });
+    // const val$ = combineLatest(this.idNo, this.idType, (_no, _type) => {
+    //   return {
+    //     identityType: _type,
+    //     identityNo: _no
+    //   };
+    // });
+    const val$ = combineLatest(this.idNo, this.idType).pipe(
+      map(([_no, _type]) => ({
+        identityNo: _no,
+        identityType: _type
+      }))
+    )
     this.sub = val$.subscribe(id => {
       // 将变化的值发送到父组件
       this.propagateChange(id);
-    })
+    });
   }
 
   ngOnDestroy(): void {

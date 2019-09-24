@@ -42,15 +42,11 @@ export class ImageListSelectComponent implements ControlValueAccessor {
   writeValue(obj: any): void {
     // console.log('执行了writeValue');
     this.selected = obj;
-    console.log("write");
-    console.log(obj);
   }
   //用来通知外部，组件已经发生变化
   registerOnChange(fn: any): void {
     //这里必须添加，不然外部表单获取不到变化
     this.propagateChange = fn;
-    console.log("register");
-    console.log(this.selected);
   }
 
   registerOnTouched(fn: any): void { }

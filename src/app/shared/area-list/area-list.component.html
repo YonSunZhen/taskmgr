@@ -3,29 +3,29 @@
     <mat-form-field>
       <mat-label>请输入省份</mat-label>
       <mat-select (selectionChange)="onProvinceChange($event.value)" [(ngModel)]="_address.province">
-        <mat-option *ngFor="let p of provinces$ | async" [value]="p">
+        <mat-option *ngFor="let p of (provinces$ | async)" [value]="p">
           {{p}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field style="margin-left: 15px;">
       <mat-label>请输入城市</mat-label>
       <mat-select (selectionChange)="onCityChange($event.value)" [(ngModel)]="_address.city"> 
-        <mat-option *ngFor="let c of cities$ | async" [value]="c">
+        <mat-option *ngFor="let c of (cities$ | async)" [value]="c">
           {{c}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field style="margin-left: 15px;">
       <mat-label>请输入区县</mat-label>
       <mat-select (selectionChange)="onDistrictChange($event.value)" [(ngModel)]="_address.district"> 
-        <mat-option *ngFor="let d of districts$ | async" [value]="d">
+        <mat-option *ngFor="let d of (districts$ | async)" [value]="d">
           {{d}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="street">
+  <div class="full-width">
     <mat-form-field class="full-width">
       <input matInput placeholder="请输入街道门牌号" (change)="onStreetChange($event.target.value)" [(ngModel)]="_address.street">
     </mat-form-field>

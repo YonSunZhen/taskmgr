@@ -66,8 +66,6 @@ export class ChipListComponent implements OnInit, ControlValueAccessor {
     //     this.isDisabled = true;
     //   }
     // }
-    console.log('333333');
-    console.log(obj);
     if(this.multiple) {
       // console.log('444444');
       // const userEntities = obj.reduce((e,c) => ({...e,c}), {});
@@ -77,21 +75,15 @@ export class ChipListComponent implements OnInit, ControlValueAccessor {
       // console.log(remaining);
       //扩展运算符针对的是数组
       // this.items = [...remaining, ...obj];
-      console.log('22222');
-      console.log(obj.length);
       for(let i = 0; i < obj.length; i++) {
-        console.log('444444');
         this.items.push(obj[i]);
-        console.log('555555');
       }
-      console.log('6666666');
-      console.log(this.items);
     }else{
+      
       this.items = [...obj];
       if(this.items.length == 1) {
         this.isDisabled = true;
       }
-      console.log('777777');
     }
   }
 

@@ -74,11 +74,11 @@ export class NewTaskComponent implements OnInit {
     let remark = value.remark;
     let owner = value.performerChips;
     let participants = value.participantChips;
-    console.log('00000');
-    console.log(owner);
+    // console.log('00000');
+    // console.log(owner);
     
-    console.log('111111');
-    console.log(participants);
+    // console.log('111111');
+    // console.log(participants);
     const data = {
       'desc': desc,
       'priority':priority,
