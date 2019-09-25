@@ -66,23 +66,18 @@ export class ChipListComponent implements OnInit, ControlValueAccessor {
     //     this.isDisabled = true;
     //   }
     // }
-    if(this.multiple) {
-      // console.log('444444');
-      // const userEntities = obj.reduce((e,c) => ({...e,c}), {});
-      // console.log(userEntities);
-      // const remaining = this.items.filter(item => !userEntities[item.id]);
-      // console.log('555555');
-      // console.log(remaining);
-      //扩展运算符针对的是数组
-      // this.items = [...remaining, ...obj];
-      for(let i = 0; i < obj.length; i++) {
-        this.items.push(obj[i]);
-      }
-    }else{
-      
-      this.items = [...obj];
-      if(this.items.length == 1) {
-        this.isDisabled = true;
+    if(obj) {
+      if(this.multiple) {
+        //扩展运算符针对的是数组
+        // this.items = [...remaining, ...obj];
+        for(let i = 0; i < obj.length; i++) {
+          this.items.push(obj[i]);
+        }
+      }else{ 
+        this.items = [...obj];
+        if(this.items.length == 1) {
+          this.isDisabled = true;
+        }
       }
     }
   }

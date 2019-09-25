@@ -27,31 +27,33 @@ export class TaskHomeComponent implements OnInit {
   ngOnInit() {
     this.taskListService$.get('1').subscribe(lists => {
       this.lists = lists;
-      //自己的方法(初始化任务列表和列表数据)
-      for(let i = 0; i < this.lists.length; i++){
-        this.lists[i].tasks = [];
-        if(this.lists[i].taskIds.length > 0) {
+      if(this.lists) {
+        //自己的方法(初始化任务列表和列表数据)
+        for(let i = 0; i < this.lists.length; i++){
+          this.lists[i].tasks = [];
+          if(this.lists[i].taskIds) {
 
-          for(let j = 0; j < this.lists[i].taskIds.length; j++) {
-            this.taskService$.get(lists[i].taskIds[j]).subscribe(task => {
-              const ownerId = task[0].ownerId;
-              const participantsIds = JSON.parse(JSON.stringify(task[0].participantsIds));
-              let data = JSON.parse(JSON.stringify(task[0]));
-              data.participants = [];
-              data.owner = [];
-              this.userService$.getById(ownerId).subscribe(user => {
-                data.owner.push(user[0]);
-              })
-              for(let i = 0; i < participantsIds.length; i++) {
-                this.userService$.getById(participantsIds[i]).subscribe(user => {
-                  data.participants.push(user[0]);
+            for(let j = 0; j < this.lists[i].taskIds.length; j++) {
+              this.taskService$.get(lists[i].taskIds[j]).subscribe(task => {
+                const ownerId = task[0].ownerId;
+                const participantsIds = JSON.parse(JSON.stringify(task[0].participantsIds));
+                let data = JSON.parse(JSON.stringify(task[0]));
+                data.participants = [];
+                data.owner = [];
+                this.userService$.getById(ownerId).subscribe(user => {
+                  data.owner.push(user[0]);
                 })
-              }
-              this.lists[i].tasks.push(data);
-            })
+                for(let i = 0; i < participantsIds.length; i++) {
+                  this.userService$.getById(participantsIds[i]).subscribe(user => {
+                    data.participants.push(user[0]);
+                  })
+                }
+                this.lists[i].tasks.push(data);
+              })
+            }
+
+
           }
-
-
         }
       }
       // console.log('0000');
@@ -67,49 +69,66 @@ export class TaskHomeComponent implements OnInit {
   }
   //打开新建任务对话框(增加任务)
   openNewTaskDialog(listId) {
+    let isClickBackDrop = false;
     const dialogRef = this.dialog.open(NewTaskComponent,{
       data: { }
     });
+    dialogRef.backdropClick().subscribe(() => {
+      isClickBackDrop = true;
+    })
     dialogRef.afterClosed().subscribe(result => {
-      let data = result.task;
-      data.completed = false;
-      data.ownerId = "1";
-      data.taskListId = listId;
-      this.taskService$.add(data).subscribe(res => {
-        if(res.id){
-          // this.taskListService$.update() 这里有点问题，完成了增加任务，但是没能将任务id更新到taskList表中
-          console.log('成功添加任务');
-          console.log(res);
-        }
-      })
+      if(isClickBackDrop) {
+        return;
+      }else{
+        let data = result.task;
+        data.completed = false;
+        data.ownerId = "1";
+        data.taskListId = listId;
+        this.taskService$.add(data).subscribe(res => {
+          if(res.id){
+            // this.taskListService$.update() 这里有点问题，完成了增加任务，但是没能将任务id更新到taskList表中
+            console.log('成功添加任务');
+            console.log(res);
+          }
+        })
+      }
     });
   }
 
   //打开修改任务对话框
   openEditTaskDialog(task) {
+    let isClickBackDrop = false;
     const dialogRef = this.dialog.open(NewTaskComponent,{
       data: {
         "tasks":task
       }
     });
+    // 点击了对话框外面的区域
+    dialogRef.backdropClick().subscribe((res) => {
+      isClickBackDrop = true;
+    })
     dialogRef.afterClosed().subscribe(result => {
-      let type = result.type;
-      let data = result.task;
-      data.id = task.id;
-      if(type === "update") {
-        this.taskService$.updateDetail(data).subscribe(res => {
-          if(res.id){
-            console.log('成功修改任务详情');
-            console.log(res);
-          }
-        })
-      }else if(type === "delete") {
-        this.taskService$.del(data).subscribe(res => {
-          if(res.id){
-            console.log('成功删除任务');
-            console.log(res);
-          }
-        })
+      if(isClickBackDrop) {
+        return;
+      }else{
+        let type = result.type? result.type : '';
+        let data = result.task;
+        data.id = task.id;
+        if(type === "update") {
+          this.taskService$.updateDetail(data).subscribe(res => {
+            if(res.id){
+              console.log('成功修改任务详情');
+              console.log(res);
+            }
+          })
+        }else if(type === "delete") {
+          this.taskService$.del(data).subscribe(res => {
+            if(res.id){
+              console.log('成功删除任务');
+              console.log(res);
+            }
+          })
+        }
       }
     });
   }
@@ -162,6 +181,8 @@ export class TaskHomeComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log('这里是调试2');
+      console.log(result);
       const data = {
         name: result.name,
         id: taskLists.id
